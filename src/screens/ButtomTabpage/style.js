@@ -3,6 +3,7 @@ export default StyleSheet.create({
   container: {
     backgroundColor: 'black',
     padding: 10,
+    flex:1,
   },
   icon: {
     width: 40,
@@ -71,5 +72,5 @@ export default StyleSheet.create({
     color: 'grey',
     alignSelf: 'center',
     marginRight: 30,
-  },
+  }
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Image,
   View,
+  
   Text,
   StyleSheet,
   ImageBackground,
@@ -11,7 +12,7 @@ import styles from './style';
 
 export default class SplashScreen extends React.Component {
   componentDidMount() {
-    setTimeout(() => this.props.navigation.navigate('WEBINARS'), 2000);
+    setTimeout(() => this.props.navigation.navigate('AppStack'), 2000);
   }
   render() {
     return (

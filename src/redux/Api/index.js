@@ -9,7 +9,7 @@ export default class Api {
             const response=await axios({
                 method:'POST',
                 headers:{ 'content-type': 'application/json','Accept': 'application/json'},
-                url: Constants.MainUrl+url,
+                url: Constants.BasicUrl+url,
                 data
             })
            return response.data
@@ -18,17 +18,20 @@ export default class Api {
         }
     }
   
-    static fetchDataByGET=async(url,token)=>{
+    static fetchDataByGET=async(url)=>{
+        console.log('kkkkkkkkkkk'+url)
       try {
         const response=await axios({
             method:'GET',
              headers: {
-                'Authorization': 'bearer ' + token
+                //'Authorization': 'bearer ' + token
             },
-            url:url 
+            url:Constants.BasicUrl+url 
         })
+          console.log('ppp'+response.data)
          return response.data
       } catch (error) {
+            console.log('ppp'+error)
           throw error
       }
   }

@@ -2,7 +2,9 @@ import React from 'react';
 import {Text, View, FlatList, Image, StatusBar, Alert} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
-import styles from './styles';
+import styles from './style';
+import Artical from './Artical.js';
+import Saved from './Saved.js';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -38,22 +40,9 @@ class LearnBlue extends React.Component {
   render() {
     return (
       <View style={{backgroundColor: 'black'}}>
-        <StatusBar
-          barStyle="dark-content"
-          hidden={false}
-          backgroundColor="transparent"
-          translucent={true}
-        />
-        <View style={styles.header}>
-          <TouchableOpacity style={{height: 40, width: 30}}>
-            <Image
-              source={require('../../assets/Images/menu2.jpg')}
-              style={styles.menu}
-              resizeMode={'stretch'}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={{padding: 10, flexDirection: 'row'}}>
+     
+       
+        <View style={{padding: 10,marginTop:-10, flexDirection: 'row'}}>
           <Image
             source={require('../../assets/Icons/back.png')}
             style={{width: 18, height: 18, marginTop: 5}}
@@ -67,54 +56,10 @@ class LearnBlue extends React.Component {
     );
   }
 }
-
-class Article extends React.Component {
-  // details(){
-  //   () => this.props.navigation.navigate('WEBINARS')
-  // }
-
-  render() {
-    return (
-      <View style={{backgroundColor: 'black', paddingTop: 50}}>
-        <FlatList
-          style={{width: '100%'}}
-          data={arr}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Details')}
-              style={{paddingHorizontal: 15, paddingVertical: 20}}>
-              <Image
-                source={item.image}
-                style={{width: '100%', height: 150, borderRadius: 18}}
-              />
-              <View style={{marginTop: -50, paddingHorizontal: 10}}>
-                <Text>{item.ItemName1}</Text>
-                <Text>{item.ItemName2}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-    );
-  }
-}
-
-class Saved extends React.Component {
-  render() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Saved!</Text>
-      </View>
-    );
-  }
-}
-
 const TabNavigator = createMaterialTopTabNavigator(
   {
     Article: {
-      screen: Article,
+      screen: Artical,
     },
     Saved: {
       screen: Saved,
@@ -122,7 +67,13 @@ const TabNavigator = createMaterialTopTabNavigator(
   },
   {
     tabBarOptions: {
+      color:'#000',
+      backgroundColor:'#000',
       style: {
+        width:180,
+        marginLeft:10,
+        fontSize:14,
+        color:'black',
         backgroundColor: 'black',
       },
     },
@@ -143,9 +94,26 @@ class RootScreen extends React.Component {
   };
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="transparent"
+          translucent={true}
+        />
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={this.props.navigation.toggleDrawer}>
+          <Image
+            source={require('../../assets/Images/menu2.jpg')}
+            resizeMode={'stretch'}
+            style={styles.iconMenu}
+          />
+        </TouchableOpacity>
+       
         <LearnBlue />
         <RootNav />
+    
       </View>
     );
   }

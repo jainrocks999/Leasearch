@@ -1,19 +1,26 @@
 import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import { Linking, View, Alert, ScrollView, ActivityIndicator,Share, Text, Picker, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import Classes from '../screens/Classes';
+import Icon from "react-native-vector-icons/Ionicons";
+import CALENDER from '../screens/ButtomTabpage/calendar.js';
+import WEBINARS from '../screens/ButtomTabpage/webniar';
+import Learnblue from '../screens/ButtomTabpage/Learnblue';
+
+//import Classes from '../screens/Classes';
 import SplashScreen from '../screens/SplashScreen';
-import LearnBlue from '../screens/LearnBlue';
-import Webinar from '../screens/Webinar';
+//import LearnBlue from '../screens/LearnBlue';
+//import Webinar from '../screens/Webinar';
 import Category from '../screens/Category';
-import Article from '../screens/Article';
-import Saved from '../screens/Saved';
-import HomeScreen from '../screens/HomeScreen';
+//import Article from '../screens/Article';
+import drawerPage from '../screens/DrawerPage';
+//import Saved from '../screens/Saved';
+import HomeScreen from '../screens/DrawerHomeScreen';
 import ArticleDetail from '../screens/ArticleDetail/index';
 
 const AuthNavigator = createStackNavigator(
@@ -24,9 +31,9 @@ const AuthNavigator = createStackNavigator(
     category: {
       screen: ArticleDetail,
     },
-    article: {
-      screen: Article,
-    },
+    // article: {
+    //   screen: Article,
+    // },
   },
 
   {
@@ -38,68 +45,52 @@ const AuthNavigator = createStackNavigator(
   },
 );
 
-// const details = createStackNavigator({
-//   details: {
-//     screen: ArticleDetails,
-//   },
-// });
-const bottomTab = createBottomTabNavigator(
-  {
-    CLASSES: {
-      screen: Classes,
-      navigationOptions: {
-        tabBarLabel: 'CALENDER',
-      },
-    },
-    WEBINARS: {
-      screen: Webinar,
-      navigationOptions: {
-        tabBarLabel: 'LEGAL UPDATE' + '\n' + 'PODCAST',
-        //title: 'Ligit ',
-      },
-    },
-    LEARNBLUE: {
-      screen: LearnBlue,
-      navigationOptions: {
-        tabBarLabel: 'INTEROGATIONS',
-      },
-    },
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: '#fff',
-      inactiveTintColor: '#fff',
-
-      labelStyle: {
-        fontSize: 14,
-        alignItems: 'center',
-        alignContent: 'center',
-        alignSelf: 'center',
-        textAlign: 'center',
-      },
-      style: {
-        backgroundColor: '#0C1C5B',
-        height: 65,
-      },
-    },
-  },
+const DrawerStack = createStackNavigator(
+{
+Drawer: {
+screen: HomeScreen,
+},
+},
+{
+defaultNavigationOptions: ({navigation}) => {
+return {
+header: false,
+title: '',
+headerStyle: {
+backgroundColor: 'transparent',
+},
+headerTintColor: 'black',
+headerLeft: () => (
+<Icon
+style={{paddingLeft: 10, color: 'white'}}
+onPress={() => navigation.toggleDrawer()}
+name="md-menu"
+size={30}
+/>
+),
+};
+},
+},
 );
-const drawer = createDrawerNavigator({
-  MainDrawer: bottomTab,
-});
-const drawerStack = createStackNavigator(
-  {
-    DrawerNav: drawer,
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  },
+const AppStack = createDrawerNavigator(
+{
+Dashboard: DrawerStack,
+// Profile: ProfileStack,
+//Notification: NotificationStack,
+// About: AboutStack,
+//Contact: ContactStack,
+//AddIssue: IssueStack,
+},
+{
+initialRouteName: 'Dashboard',
+contentComponent: drawerPage,
+},
 );
 const AuthStack = createSwitchNavigator({
   Auth: AuthNavigator,
-  Tab: bottomTab,
-  home: drawerStack,
+  //Tab: bottomTab,
+  AppStack:AppStack,
+ // home: drawerStack,
   Details: {screen: ArticleDetail},
 });
 

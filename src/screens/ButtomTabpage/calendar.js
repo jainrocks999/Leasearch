@@ -9,7 +9,7 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import styles from './styles';
+import styles from './style';
 import {withNavigation, DrawerActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -62,11 +62,8 @@ var arr = [
 ];
 export default class Classes extends React.Component {
   static navigationOptions = {
+      title: 'CALENDAR',
     tabBarIcon: ({tintColor}) => (
-      // <Image
-      //   style={{height: 20, width: 20}}
-      //   source={require('../../assets/Images/calender.png')}
-      // />
       <Icon name="calendar" size={30} color="#1865A8" />
     ),
   };

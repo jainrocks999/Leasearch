@@ -7,10 +7,11 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  TextInput,
   StatusBar,
   ImageBackground,
 } from 'react-native';
-import styles from './styles';
+import styles from './style';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var arr = [
@@ -37,13 +38,10 @@ var arr = [
 ];
 
 export default class Webinar extends React.Component {
-  static navigationOptions = {
-    tabBarIcon: () => (
-      // <Image
-      //   style={{height: 20, width: 20, margin: 5}}
-      //   source={require('../../assets/Images/web.png')}
-      // />
-      <Icon name="laptop" size={40} color="#1865A8" />
+ static navigationOptions = {
+      title: 'CALENDAR',
+    tabBarIcon: ({tintColor}) => (
+      <Icon name="calendar" size={30} color="#1865A8" />
     ),
   };
   renderSeparator = () => {
@@ -60,39 +58,37 @@ export default class Webinar extends React.Component {
   render() {
     const {navigation} = this.props;
     return (
-      <View style={{backgroundColor: 'black', flex: 1}}>
+      <View style={styles.container}>
         <StatusBar
           barStyle="dark-content"
           hidden={false}
           backgroundColor="transparent"
           translucent={true}
         />
+ <TouchableOpacity
+          style={styles.icon}
+          onPress={this.props.navigation.toggleDrawer}>
+          <Image
+            source={require('../../assets/Images/menu2.jpg')}
+            resizeMode={'stretch'}
+            style={styles.iconMenu}
+          />
+        </TouchableOpacity>
+        <View style={styles.iconSearch}>
+          <Image
+            source={require('../../assets/Icons/search_icon.png')}
+            style={styles.iconSearch1}
+            resizeMode={'contain'}
+          />
 
-        <View style={{width: '100%'}}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={{height: 40, width: 30}}
-              onPress={() => this.props.navigation.navigate('Details')}>
-              <Image
-                source={require('../../assets/Images/menu2.jpg')}
-                style={styles.menu}
-                resizeMode={'stretch'}
-              />
-            </TouchableOpacity>
-            <Image
-              source={require('../../assets/Images/search.png')}
-              style={{width: 30, height: 25}}
-              resizeMode={'center'}
-            />
-          </View>
-          <View style={styles.iconView}>
-            <Image
-              source={require('../../assets/Images/logo2_small.png')}
-              //style={{width: 65, height: 65}}
-              resizeMode={'cover'}
-            />
-          </View>
+          <TextInput
+            placeholder="Search for all Categories,topic etc"
+            placeholderTextColor="grey"
+            style={styles.input}
+          />
         </View>
+  
+         
         <View style={styles.imageContainer}>
           <View style={styles.image}>
             <Text style={{fontSize: 14, textAlign: 'center', color: 'white'}}>
