@@ -4,7 +4,7 @@ import Constants from '../Constants';
 
 export default class Api {
 
-    static fetchDataByPOST=async(url,data,token)=>{
+    static fetchDataByPOST=async(url,data)=>{
         try {
             const response=await axios({
                 method:'POST',

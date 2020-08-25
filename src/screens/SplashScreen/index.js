@@ -9,9 +9,11 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './style';
+import { connect } from 'react-redux';
 
-export default class SplashScreen extends React.Component {
+ class SplashScreen extends React.Component {
   componentDidMount() {
+this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
     setTimeout(() => this.props.navigation.navigate('AppStack'), 2000);
   }
   render() {
@@ -52,3 +54,11 @@ export default class SplashScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps=(state)=>{
+  return{
+    isFetching:state.Menu.isFetching,
+    Menu:state.Menu.Menu,
+  }
+}
+  export default connect(mapStateToProps)(SplashScreen)
