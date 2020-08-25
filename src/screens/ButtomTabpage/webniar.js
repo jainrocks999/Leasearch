@@ -14,6 +14,8 @@ import {
 import styles from './style';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {SliderBox} from 'react-native-image-slider-box';
+
 var arr = [
   {
     image: require('../../assets/Images/tree.jpg'),
@@ -36,12 +38,12 @@ var arr = [
   {image: require('../../assets/Images/tree.jpg'), ItemName1: 'Cotegory Name'},
   {image: require('../../assets/Images/tree.jpg'), ItemName1: 'Cotegory Name'},
 ];
-
+var originText = 'LEGAL UPDATE PODCAST';
 export default class Webinar extends React.Component {
- static navigationOptions = {
-      title: 'CALENDAR',
+  static navigationOptions = {
+    title: `LEGAL UPDATE ${'\n'}PODCAST`,
     tabBarIcon: ({tintColor}) => (
-      <Icon name="calendar" size={30} color="#1865A8" />
+      <Icon name="laptop" size={25} color="#1865A8" />
     ),
   };
   renderSeparator = () => {
@@ -55,46 +57,79 @@ export default class Webinar extends React.Component {
       />
     );
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [
+        // require('../../assets/Icons/imgIcon.png'), // Local image
+        'https://source.unsplash.com/1024x768/?nature',
+        'https://source.unsplash.com/1024x768/?water',
+        'https://source.unsplash.com/1024x768/?girl',
+        'https://source.unsplash.com/1024x768/?tree', // Network image
+      ],
+    };
+  }
+
   render() {
     const {navigation} = this.props;
     return (
-      <View style={styles.container}>
+      <View style={{backgroundColor: 'black', flex: 1}}>
         <StatusBar
           barStyle="dark-content"
           hidden={false}
           backgroundColor="transparent"
           translucent={true}
         />
- <TouchableOpacity
-          style={styles.icon}
-          onPress={this.props.navigation.toggleDrawer}>
-          <Image
-            source={require('../../assets/Images/menu2.jpg')}
-            resizeMode={'stretch'}
-            style={styles.iconMenu}
-          />
-        </TouchableOpacity>
-        <View style={styles.iconSearch}>
-          <Image
-            source={require('../../assets/Icons/search_icon.png')}
-            style={styles.iconSearch1}
-            resizeMode={'contain'}
-          />
 
-          <TextInput
-            placeholder="Search for all Categories,topic etc"
-            placeholderTextColor="grey"
-            style={styles.input}
-          />
+        <View style={{width: '100%'}}>
+          <View style={styles.header}>
+            <TouchableOpacity
+              style={{height: 40, width: 30}}
+              onPress={() => this.props.navigation.toggleDrawer()}>
+              <Image
+                source={require('../../assets/Images/menu2.jpg')}
+                style={styles.menu}
+                resizeMode={'stretch'}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate('Search');
+              }}>
+              <Image
+                source={require('../../assets/Images/search.png')}
+                style={{width: 30, height: 25}}
+                resizeMode={'center'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.iconView}>
+            <Image
+              source={require('../../assets/Images/logo2_small.png')}
+              //style={{width: 65, height: 65}}
+              resizeMode={'cover'}
+            />
+          </View>
         </View>
-  
-         
+
         <View style={styles.imageContainer}>
           <View style={styles.image}>
-            <Text style={{fontSize: 14, textAlign: 'center', color: 'white'}}>
-              IMAGES THAT WILL BE CHANGED PERIODICALLY.{'\n'}
-              SWIPING RIGHT/LEFT SHOWS{'\n'} NEXT IMAGE
-            </Text>
+            <SliderBox
+              images={this.state.images}
+              sliderBoxHeight={250}
+              onCurrentImagePressed={(index) =>
+                console.warn(`image ${index} pressed`)
+              }
+              dotColor="#FFEE58"
+              inactiveDotColor="#90A4AE"
+              paginationBoxVerticalPadding={20}
+              autoplay
+              circleLoop
+              ImageComponentStyle={{
+                width: '90%',
+                marginTop: 5,
+              }}
+            />
           </View>
         </View>
         <View style={{padding: 10}}>
@@ -117,7 +152,7 @@ export default class Webinar extends React.Component {
                     resizeMode={'contain'}
                   />
                 </View> */}
-                <View style={{marginTop: 5}}>
+                <View style={{marginTop: 5, paddingHorizontal: 10}}>
                   <Text style={styles.text}>{item.ItemName1}</Text>
                 </View>
               </ImageBackground>

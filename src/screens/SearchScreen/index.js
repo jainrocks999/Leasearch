@@ -102,7 +102,7 @@ export default class Classes extends React.Component {
             />
           </View>
           <View style={styles.text}>
-            <Text style={styles.all}>All Categories</Text>
+            <Text style={styles.all}>SEARCHES</Text>
             <View style={styles.slider}></View>
           </View>
           <FlatList

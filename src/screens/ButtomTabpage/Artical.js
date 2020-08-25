@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {Text, View, FlatList, Image, StatusBar, Alert} from 'react-native';
 import {createAppContainer} from 'react-navigation';
@@ -48,7 +47,7 @@ class Article extends React.Component {
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Details')}
+              onPress={() => this.props.navigation.navigate('category')}
               style={{paddingHorizontal: 15, paddingVertical: 20}}>
               <Image
                 source={item.image}

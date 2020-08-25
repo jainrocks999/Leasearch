@@ -6,24 +6,24 @@ import Learnblue from '../ButtomTabpage/Learnblue';
 //import UpcomingPage from '../../ButtomTabpage/upcoming';
 
 const Navegador = createBottomTabNavigator(
-{
-CALENDER: {
-screen: CALENDER,
-},
-WEBINARS: {
-screen: WEBINARS,
-},
-Learnblue: {
-screen: Learnblue,
-},
-},
-{
+  {
+    CALENDER: {
+      screen: CALENDER,
+    },
+    WEBINARS: {
+      screen: WEBINARS,
+    },
+    Learnblue: {
+      screen: Learnblue,
+    },
+  },
+  {
     tabBarOptions: {
       activeTintColor: '#fff',
       inactiveTintColor: '#fff',
 
       labelStyle: {
-        fontSize: 14,
+        fontSize: 12,
         alignItems: 'center',
         alignContent: 'center',
         alignSelf: 'center',
@@ -31,10 +31,10 @@ screen: Learnblue,
       },
       style: {
         backgroundColor: '#0C1C5B',
-         height: 65,
-       },
-     },
- },
+        height: 65,
+      },
+    },
+  },
 );
 
 export default Navegador;
