@@ -13,7 +13,7 @@ import {
 import styles from './style';
 import {withNavigation, DrawerActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { connect } from 'react-redux';
 var arr = [
   {
     image: require('../../assets/Images/tree.jpg'),
@@ -61,7 +61,7 @@ var arr = [
     ItemName2: 'Cotegory | july 15 2020',
   },
 ];
-export default class Classes extends React.Component {
+ class CALENDAR extends React.Component {
   static navigationOptions = {
     title: 'CALENDAR',
     tabBarIcon: ({tintColor}) => (
@@ -69,6 +69,8 @@ export default class Classes extends React.Component {
     ),
   };
   render() {
+        const {navigation,Menu} = this.props;
+
     return (
       <View style={styles.container}>
         <StatusBar
@@ -106,7 +108,7 @@ export default class Classes extends React.Component {
             <View style={styles.slider}></View>
           </View>
           <FlatList
-            data={arr}
+            data={Menu}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <View style={styles.view1}>
@@ -119,9 +121,9 @@ export default class Classes extends React.Component {
                   </View>
                   <View style={{marginLeft: 20}}>
                     <Text style={{color: 'white', fontSize: 12}}>
-                      Fourth Amendment Searches
+                  {item.title}
                     </Text>
-                    <Text style={styles.article}>31 articles</Text>
+                   
                   </View>
                 </View>
                 <View style={styles.playIcon}>
@@ -147,3 +149,10 @@ export default class Classes extends React.Component {
     );
   }
 }
+const mapStateToProps=(state)=>{
+  return{
+    isFetching:state.isFetching,
+    Menu:state.Menu,
+  }
+}
+  export default connect(mapStateToProps)(CALENDAR)

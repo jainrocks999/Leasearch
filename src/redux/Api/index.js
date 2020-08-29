@@ -19,14 +19,12 @@ export default class Api {
     }
   
     static fetchDataByGET=async(url)=>{
-        console.log('kkkkkkkkkkk'+url)
+        console.log('kkkkkkkkkkk'+Constants.BasicUrl+url)
       try {
+
         const response=await axios({
             method:'GET',
-             headers: {
-                //'Authorization': 'bearer ' + token
-            },
-            url:Constants.BasicUrl+url 
+            url:Constants.BasicUrl + url
         })
           console.log('ppp'+response.data)
          return response.data

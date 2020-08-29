@@ -9,56 +9,76 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './style';
+import Axios from 'axios';
+
 import { connect } from 'react-redux';
 
  class SplashScreen extends React.Component {
-  componentDidMount() {
-this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
-    setTimeout(() => this.props.navigation.navigate('AppStack'), 2000);
-  }
+    constructor(props) {
+console.log('vbfjvbjkfbvfvbjf')
+        super(props);
+        this.state = {
+            name: '',
+            mobile: '',
+            Number:'',
+           // pimage: require('../images/user.png'),
+            currentpage: '',
+        }
+        this.fetchData();
+    }
+   fetchData=async()=>{
+ this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
+  setTimeout(() => this.props.navigation.navigate('AppStack'), 2000);
+   }
+
   render() {
     return (
+      <View style={{flex:1,justifyContent:'center'}}>
       <ImageBackground
         source={require('../../assets/Icons/splash.png')}
         style={styles.ab}
-        resizeMode={'cover'}>
+        >
+        
+         
         <StatusBar
           barStyle="dark-content"
           hidden={false}
           backgroundColor="transparent"
           translucent={true}
         />
-
+ <View style={{flex:1,justifyContent:'center'}}>
         <View style={styles.view}>
           <Image
             source={require('../../assets/Icons/logo.png')}
             style={{
-              width: '100%',
-              height: '100%',
+              width: '90%',
+              height: '90%',
+              justifyContent:'center',
               backgroundColor: 'transparent',
             }}
-            resizeMode={'contain'}
+           // resizeMode={'contain'}
           />
         </View>
-        <View
-          style={{
-            height: '35%',
-            justifyContent: 'space-between',
-            alignContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={{justifyContent:'center', alignItems:'center',}}>
           <Text style={styles.search}>SEARCH {'&'} SEIZURE</Text>
+       </View>
+          </View>
+          <View style={{justifyContent:'center',margin:20}}>
           <Text style={styles.lea}>LEA.ONE</Text>
-        </View>
+          </View>
+          
       </ImageBackground>
+      </View>
     );
   }
 }
 
 const mapStateToProps=(state)=>{
+  console.log('data '+JSON.stringify(state.isFetching))
+  console.log('data '+JSON.stringify(state.Menu))
   return{
-    isFetching:state.Menu.isFetching,
-    Menu:state.Menu.Menu,
+    isFetching:state.isFetching,
+    Menu:state.Menu,
   }
 }
   export default connect(mapStateToProps)(SplashScreen)

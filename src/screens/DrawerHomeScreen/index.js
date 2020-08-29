@@ -17,10 +17,14 @@ const Navegador = createBottomTabNavigator(
       screen: Learnblue,
     },
   },
+  
   {
+    initialRouteName:'WEBINARS',
     tabBarOptions: {
       activeTintColor: '#fff',
       inactiveTintColor: '#fff',
+     
+      
 
       labelStyle: {
         fontSize: 12,

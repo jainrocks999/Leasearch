@@ -1,5 +1,5 @@
 import React from 'react';
-import {Linking, View, Alert, ScrollView, ActivityIndicator,Share, Text, Picker, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {Linking, View, Alert,FlatList, ScrollView, ActivityIndicator,Share, Text, Picker, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { connect } from 'react-redux';
@@ -15,17 +15,14 @@ console.log('vbfjvbjkfbvfvbjf')
            // pimage: require('../images/user.png'),
             currentpage: '',
         }
-        this.fetchData();
+       
     }
-   fetchData=async()=>{
-       console.log('this is run')
- this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
-   }
+  
     getprofile = () => {
      this.props.navigation.navigate('Profile');
    }
     renderDrawerItem = (route) => {
-        console.log('jbkbjbjdbhjbd'+route)
+        console.log('jbkbjbjdbhjbd'+route.key)
         const onpress = (route.key === 'Logins') 
                      ?() => AsyncStorage.clear().then(p => this.props.navigation.navigate(route.key))
                      :(route.key === 'logout') 
@@ -114,6 +111,7 @@ console.log('vbfjvbjkfbvfvbjf')
     }
         
     render() {
+         const {navigation,Menu} = this.props;
         return (
             <ScrollView >
                 <View style={{}}>
@@ -134,8 +132,13 @@ console.log('vbfjvbjkfbvfvbjf')
                 
                     </View>
 
-                   
-                   {this.renderDrawerItem({  label: 'Logout', key: 'logout',color:'#fff' })}
+                    <FlatList
+                        data={Menu}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) =>
+                   {this.renderDrawerItem({  label: item.title, key: item.title,color:'#000' })}
+                        }
+                        />
                 
                 </View>
             </ScrollView>
@@ -175,8 +178,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps=(state)=>{
   return{
-      isFetching:state.Menu.isFetching,
-      Menu:state.Menu.Menu,
+      isFetching:state.isFetching,
+      Menu:state.Menu,
     
   }
 }

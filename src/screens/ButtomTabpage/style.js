@@ -137,7 +137,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   menu: {
-    width: 40,
+    width: 30,
     height: 30,
     tintColor: 'white',
     alignContent: 'center',

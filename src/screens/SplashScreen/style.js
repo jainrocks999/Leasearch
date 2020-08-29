@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   lea: {
-    color: 'white',
-    fontSize: 18,
+    color: '#fff',
+    fontSize: 14,
     textAlign: 'center',
     fontWeight: 'bold',
     //paddingTop: 100,
@@ -11,21 +11,24 @@ export default StyleSheet.create({
   search: {
     marginTop: 20,
     color: 'white',
-    fontSize: 28,
+    fontSize: 24,
+    justifyContent:'center',
+    alignItems:'center',
     fontWeight: 'bold',
   },
   view: {
-    marginTop: 200,
-    height: 280,
-    width: 280,
+   // marginTop: 200,
+    height: 240,
+    width: 240,
     alignItems: 'center',
-    alignContent: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
   },
   ab: {
-    width: '100%',
-    height: '100%',
     flex: 1,
+    justifyContent:'center',
+    alignItems:'center',
+    height:'99%',
+
   },
 });

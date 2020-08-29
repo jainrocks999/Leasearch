@@ -3,15 +3,16 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 
- function* fetchData(action){
+ function* fetchMenuData(action){
    console.log('qqq'+action.url)
    try{
    const response=yield call(Api.fetchDataByGET,action.url)
-        console.log(''+JSON.sresponse)
-        if (response.meta.code == '200') {
+        console.log('Saga Resonse'+JSON.stringify(response))
+        if (response.code == '200') {
+            console.log('rohitkfnnfb done')
             yield put({
                 type:'Fetch_Menu_Success',
-                payload:response.data.data,
+                payload:response.data,
     
             })
             
@@ -30,8 +31,6 @@ import { Alert } from 'react-native';
       
         }
     } catch (error) {
-        console.log('dddddddd'+error)
-        
         yield put({
             type:'Fetch_Menu_Error',
         }) 
@@ -40,7 +39,7 @@ import { Alert } from 'react-native';
  }
 
 export default function* MenuSaga(){
-    yield takeEvery('Fetch_Data_Request',fetchData)
+    yield takeEvery('Fetch_Menu_Request',fetchMenuData);
 }
 //  / export default function* taxiSaga(){
 // //     yield takeEvery('Fetch_Zone_Request',fetchZone)

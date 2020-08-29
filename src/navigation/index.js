@@ -111,7 +111,8 @@ const AppStack = createDrawerNavigator(
   },
 );
 const AuthStack = createSwitchNavigator({
-  Demo: DemoScreen,
+  SplashScreen:SplashScreen,
+  //Demo: DemoScreen,
   Auth: AuthNavigator,
   //Tab: bottomTab,
   AppStack: AppStack,

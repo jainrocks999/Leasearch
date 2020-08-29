@@ -41,11 +41,15 @@ class LearnBlue extends React.Component {
     return (
       <View style={{backgroundColor: 'black'}}>
         <View style={{padding: 10, marginTop: -10, flexDirection: 'row'}}>
+         <TouchableOpacity
+                    hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+                    onPress={() => this.props.navigation.goBack()}>
           <Image
             source={require('../../assets/Icons/back.png')}
             style={{width: 18, height: 18, marginTop: 5}}
             resizeMode={'contain'}
           />
+          </TouchableOpacity>
           <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
             Parent Name
           </Text>

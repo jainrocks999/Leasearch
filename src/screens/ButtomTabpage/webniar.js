@@ -12,6 +12,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import styles from './style';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {SliderBox} from 'react-native-image-slider-box';
@@ -39,7 +40,7 @@ var arr = [
   {image: require('../../assets/Images/tree.jpg'), ItemName1: 'Cotegory Name'},
 ];
 var originText = 'LEGAL UPDATE PODCAST';
-export default class Webinar extends React.Component {
+ class Webinar extends React.Component {
   static navigationOptions = {
     title: `LEGAL UPDATE ${'\n'}PODCAST`,
     tabBarIcon: ({tintColor}) => (
@@ -71,7 +72,7 @@ export default class Webinar extends React.Component {
   }
 
   render() {
-    const {navigation} = this.props;
+    const {navigation,Menu} = this.props;
     return (
       <View style={{backgroundColor: 'black', flex: 1}}>
         <StatusBar
@@ -98,7 +99,7 @@ export default class Webinar extends React.Component {
               }}>
               <Image
                 source={require('../../assets/Images/search.png')}
-                style={{width: 30, height: 25}}
+                style={{width: 25, height: 25,marginRight:10}}
                 resizeMode={'center'}
               />
             </TouchableOpacity>
@@ -106,36 +107,38 @@ export default class Webinar extends React.Component {
           <View style={styles.iconView}>
             <Image
               source={require('../../assets/Images/logo2_small.png')}
-              //style={{width: 65, height: 65}}
-              resizeMode={'cover'}
+              style={{width: 60, height: 66,marginTop:10}}
+              
             />
           </View>
         </View>
-
+<ScrollView style={{flex:1}}>
         <View style={styles.imageContainer}>
           <View style={styles.image}>
             <SliderBox
               images={this.state.images}
-              sliderBoxHeight={250}
+              //sliderBoxHeight={300}
               onCurrentImagePressed={(index) =>
                 console.warn(`image ${index} pressed`)
               }
               dotColor="#FFEE58"
               inactiveDotColor="#90A4AE"
-              paginationBoxVerticalPadding={20}
+              paginationBoxVerticalPadding={10}
               autoplay
               circleLoop
               ImageComponentStyle={{
-                width: '90%',
-                marginTop: 5,
+                width: '92%',
+                marginTop: 2,
+                borderRadius: 10,
+                
               }}
             />
           </View>
         </View>
-        <View style={{padding: 10}}>
+        <View style={{padding:4}}>
           <FlatList
-            style={{width: '100%'}}
-            data={arr}
+            style={{width: '99%'}}
+            data={Menu}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={this.renderSeparator}
             numColumns={2}
@@ -153,14 +156,22 @@ export default class Webinar extends React.Component {
                   />
                 </View> */}
                 <View style={{marginTop: 5, paddingHorizontal: 10}}>
-                  <Text style={styles.text}>{item.ItemName1}</Text>
+                  <Text style={styles.text}>{item.title}</Text>
                 </View>
               </ImageBackground>
             )}
             keyExtractor={(item, index) => index}
           />
         </View>
+        </ScrollView>
       </View>
     );
   }
 }
+const mapStateToProps=(state)=>{
+  return{
+    isFetching:state.isFetching,
+    Menu:state.Menu,
+  }
+}
+  export default connect(mapStateToProps)(Webinar)
