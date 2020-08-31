@@ -48,6 +48,14 @@ const ArticleStack = createStackNavigator({
     screen: ArticleDetail,
   },
 });
+const SearchStack = createStackNavigator({
+  SearchPage: {
+    screen: SearchScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+});
 
 const AuthNavigator = createStackNavigator(
   {
@@ -106,7 +114,7 @@ const AppStack = createDrawerNavigator(
   },
 );
 const AuthStack = createSwitchNavigator({
-  SplashScreen:SplashScreen,
+  SplashScreen: SplashScreen,
   //Demo: DemoScreen,
   Auth: AuthNavigator,
   //Tab: bottomTab,
@@ -114,7 +122,7 @@ const AuthStack = createSwitchNavigator({
   // home: drawerStack,
   Article: ArticleStack,
   Details: {screen: ArticleDetail},
-  Search: SearchScreen,
+  Search: SearchStack,
 });
 
 const RootApp = createAppContainer(AuthStack);

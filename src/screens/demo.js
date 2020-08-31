@@ -291,7 +291,7 @@ const CONTENT = [
   },
   {
     isExpanded: false,
-    category_name: 'Item 12',
+    category_name: 'Item 15',
     subcategory: [
       {id: 43, val: 'Sub Cat 43'},
       {id: 44, val: 'Sub Cat 44'},

@@ -9,6 +9,7 @@ import {
   TextInput,
   StatusBar,
   ScrollView,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import {withNavigation, DrawerActions} from 'react-navigation';
@@ -124,7 +125,11 @@ export default class Classes extends React.Component {
                     <Text style={styles.article}>31 articles</Text>
                   </View>
                 </View>
-                <View style={styles.playIcon}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Alert.alert('Video will be played');
+                  }}
+                  style={styles.playIcon}>
                   <Image
                     style={{
                       height: 25,
@@ -137,7 +142,7 @@ export default class Classes extends React.Component {
                   />
 
                   {/* <Text style={{color: 'white', alignSelf: 'center'}}>Play</Text> */}
-                </View>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item, index) => index}

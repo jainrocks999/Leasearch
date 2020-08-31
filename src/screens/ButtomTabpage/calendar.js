@@ -9,11 +9,12 @@ import {
   TextInput,
   StatusBar,
   ScrollView,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import {withNavigation, DrawerActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 var arr = [
   {
     image: require('../../assets/Images/tree.jpg'),
@@ -61,7 +62,7 @@ var arr = [
     ItemName2: 'Cotegory | july 15 2020',
   },
 ];
- class CALENDAR extends React.Component {
+class CALENDAR extends React.Component {
   static navigationOptions = {
     title: 'CALENDAR',
     tabBarIcon: ({tintColor}) => (
@@ -69,7 +70,7 @@ var arr = [
     ),
   };
   render() {
-        const {navigation,Menu} = this.props;
+    const {navigation, Menu} = this.props;
 
     return (
       <View style={styles.container}>
@@ -121,12 +122,15 @@ var arr = [
                   </View>
                   <View style={{marginLeft: 20}}>
                     <Text style={{color: 'white', fontSize: 12}}>
-                  {item.title}
+                      {item.title}
                     </Text>
-                   
                   </View>
                 </View>
-                <View style={styles.playIcon}>
+                <TouchableOpacity
+                  style={styles.playIcon}
+                  onPress={() => {
+                    Alert.alert('Video Pressed');
+                  }}>
                   <Image
                     style={{
                       height: 25,
@@ -139,7 +143,7 @@ var arr = [
                   />
 
                   {/* <Text style={{color: 'white', alignSelf: 'center'}}>Play</Text> */}
-                </View>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item, index) => index}
@@ -149,10 +153,10 @@ var arr = [
     );
   }
 }
-const mapStateToProps=(state)=>{
-  return{
-    isFetching:state.isFetching,
-    Menu:state.Menu,
-  }
-}
-  export default connect(mapStateToProps)(CALENDAR)
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    Menu: state.Menu,
+  };
+};
+export default connect(mapStateToProps)(CALENDAR);
