@@ -99,11 +99,6 @@ const DrawerStack = createStackNavigator(
 const AppStack = createDrawerNavigator(
   {
     Dashboard: DrawerStack,
-    // Profile: ProfileStack,
-    //Notification: NotificationStack,
-    // About: AboutStack,
-    //Contact: ContactStack,
-    //AddIssue: IssueStack,
   },
   {
     initialRouteName: 'Dashboard',
