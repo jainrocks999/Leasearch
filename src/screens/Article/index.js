@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
-
+import { connect } from 'react-redux';
 var arr = [
   {
     image: require('../../assets/Images/tree.jpg'),
@@ -29,8 +29,9 @@ var arr = [
     ItemName2: 'Cotegory | july 15 2020',
   },
 ];
-export default class LearnBlue extends React.Component {
+class LearnBlue extends React.Component {
   render() {
+    const {navigation,Menu}=this.props
     return (
       <View>
         <FlatList
@@ -60,3 +61,10 @@ export default class LearnBlue extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    Menu: state.Menu,
+  };
+};
+export default connect(mapStateToProps)(LearnBlue);

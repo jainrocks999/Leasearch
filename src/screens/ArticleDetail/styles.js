@@ -8,6 +8,15 @@ export default StyleSheet.create({
     //paddingTop: 100,
     //marginTop: 180,
   },
+  image: {
+    backgroundColor: '#0C1C5B',
+    width: '100%',
+    height: 200,
+    borderWidth: 1,
+    marginTop:-0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   search: {
     marginTop: 20,
     color: 'white',
@@ -33,12 +42,13 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
+    
   },
   menu: {
-    width: 40,
-    height: 30,
-    tintColor: 'white',
+    width: 30,
+    height: 20,
     alignContent: 'center',
+    margin:8
   },
   arrows: {
     tintColor: 'white',

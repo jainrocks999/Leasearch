@@ -22,7 +22,7 @@ import {
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CALENDER from '../screens/ButtomTabpage/calendar.js';
-import WEBINARS from '../screens/ButtomTabpage/webniar';
+import Webinar from '../screens/ButtomTabpage/webniar';
 import Learnblue from '../screens/ButtomTabpage/Learnblue';
 
 //import Classes from '../screens/Classes';
@@ -38,16 +38,24 @@ import HomeScreen from '../screens/DrawerHomeScreen';
 import ArticleDetail from '../screens/ArticleDetail/index';
 import SearchScreen from '../screens/SearchScreen/index';
 
-import DemoScreen from '../screens/demo';
 
 const ArticleStack = createStackNavigator({
   artile: {
     screen: Article,
   },
-  category: {
-    screen: ArticleDetail,
-  },
+  web:{
+    screen:Webinar,navigationOptions:{
+      headerShown:false
+    }
+  }
 });
+const detailStack=createStackNavigator({
+  detail:{
+    screen:ArticleDetail,navigationOptions:{
+      headerShown:false
+    }
+  }
+})
 const SearchStack = createStackNavigator({
   SearchPage: {
     screen: SearchScreen,
@@ -107,6 +115,7 @@ const DrawerStack = createStackNavigator(
 const AppStack = createDrawerNavigator(
   {
     Dashboard: DrawerStack,
+    Article:detailStack
   },
   {
     initialRouteName: 'Dashboard',

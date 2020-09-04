@@ -60,11 +60,11 @@ console.log('vbfjvbjkfbvfvbjf')
           />
         </View>
         <View style={{justifyContent:'center', alignItems:'center',}}>
-          <Text style={styles.search}>SEARCH {'&'} SEIZURE</Text>
+          <Text style={styles.search}>SEARCH {'&'} SEIZURE </Text>
        </View>
           </View>
           <View style={{justifyContent:'center',margin:20}}>
-          <Text style={styles.lea}>LEA.ONE</Text>
+          <Text style={styles.lea}>LEA.ONE </Text>
           </View>
           
       </ImageBackground>

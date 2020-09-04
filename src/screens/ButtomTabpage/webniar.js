@@ -141,22 +141,24 @@ class Webinar extends React.Component {
               ItemSeparatorComponent={this.renderSeparator}
               numColumns={2}
               renderItem={({item}) => (
+                <TouchableOpacity style={{width:'50%',height:100}} 
+                 onPress={()=>this.props.navigation.navigate('detail',{
+                  MenuId:item.object_id
+                })}>
                 <ImageBackground
                   style={styles.list}
                   source={require('../../assets/Icons/imgIcon.png')}
                   resizeMode={'cover'}
                   imageStyle={{opacity: 0.5}}>
-                  {/* <View style={styles.listView}>
-                  <Image
-                    style={{height: 60, width: 60}}
-                    source={item.image}
-                    resizeMode={'contain'}
-                  />
-                </View> */}
-                  <View style={{marginTop: 5, paddingHorizontal: 10}}>
+                
+                  <View style={{marginTop: 5, paddingHorizontal: 10}}
+                 
+                  >
                     <Text style={styles.text}>{item.title}</Text>
+              
                   </View>
                 </ImageBackground>
+                </TouchableOpacity>
               )}
               keyExtractor={(item, index) => index}
             />

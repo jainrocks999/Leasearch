@@ -8,33 +8,7 @@ import Saved from './Saved.js';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-var arr = [
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-];
+import { connect } from 'react-redux';
 
 class LearnBlue extends React.Component {
   render() {
@@ -121,5 +95,11 @@ class RootScreen extends React.Component {
     );
   }
 }
-
-export default RootScreen;
+const mapStateToProps = (state) => {
+  console.log('jai jai'+JSON.stringify(state))
+  return {
+    isFetching: state.isFetching,
+    Menu: state.Menu,
+  };
+};
+export default connect(mapStateToProps)(RootScreen);

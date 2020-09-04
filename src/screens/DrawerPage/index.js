@@ -17,6 +17,33 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {connect} from 'react-redux';
+var arr = [
+  {
+    image: require('../../assets/Images/tree.jpg'),
+    ItemName1: 'Article title here',
+    ItemName2: 'Cotegory | july 15 2020',
+  },
+  {
+    image: require('../../assets/Images/tree.jpg'),
+    ItemName1: 'Article title here',
+    ItemName2: 'Cotegory | july 15 2020',
+  },
+  {
+    image: require('../../assets/Images/tree.jpg'),
+    ItemName1: 'Article title here',
+    ItemName2: 'Cotegory | july 15 2020',
+  },
+  {
+    image: require('../../assets/Images/tree.jpg'),
+    ItemName1: 'Article title here',
+    ItemName2: 'Cotegory | july 15 2020',
+  },
+  {
+    image: require('../../assets/Images/tree.jpg'),
+    ItemName1: 'Article title here',
+    ItemName2: 'Cotegory | july 15 2020',
+  },
+];
 class MyDrawer extends React.Component {
   constructor(props) {
     console.log('vbfjvbjkfbvfvbjf');
@@ -27,9 +54,12 @@ class MyDrawer extends React.Component {
       Number: '',
       // pimage: require('../images/user.png'),
       currentpage: '',
-    };
+    }
+    this.fetchData();
   }
-
+       fetchData=async()=>{
+     this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
+       }
   getprofile = () => {
     this.props.navigation.navigate('Profile');
   };
@@ -152,6 +182,7 @@ class MyDrawer extends React.Component {
 
   render() {
     const {navigation, Menu} = this.props;
+    
     return (
       <ScrollView>
         <View style={{}}>
@@ -178,18 +209,41 @@ class MyDrawer extends React.Component {
             <View style={{height: 1, backgroundColor: '#000'}}></View>
           </View>
 
-          <FlatList
-            data={Menu}
-            keyExtractor={(item, index) => index.toString()}
+          {/* <FlatList
+           data={Menu}
+           showsVerticalScrollIndicator={false}
+           ItemSeparatorComponent={this.renderSeparator}
+           numColumns={2}
             renderItem={({item}) => {
-              this.renderDrawerItem({
+               this.renderDrawerItem({
                 label: item.title,
-                key: item.title,
+                key: item.key,
                 color: '#000',
-              });
-            }}
-          />
-        </View>
+               });
+             }}
+          /> */}
+
+         <FlatList
+          style={{width: '100%'}}
+          data={Menu}
+              showsVerticalScrollIndicator={false}
+              ItemSeparatorComponent={this.renderSeparator}
+              numColumns={1}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('category')}
+              style={{paddingHorizontal: 15, paddingVertical: 20}}>
+            
+              <View style={{marginTop: -50, paddingHorizontal: 10}}>
+                <Text style={{color:'#000'}}>{item.post_type}</Text>
+         
+              </View>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item, index) => index}
+        />
+     
+        </View> 
       </ScrollView>
     );
   }
@@ -224,6 +278,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
+  console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'+JSON.stringify(state.Menu))
   return {
     isFetching: state.isFetching,
     Menu: state.Menu,

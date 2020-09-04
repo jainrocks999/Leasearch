@@ -18,13 +18,6 @@ import { Alert } from 'react-native';
             
         } else {
             console.log(response.meta.message)
-            Alert.alert(
-                'Explored',
-                response.meta.message,
-                [
-                    {text:'Ok',style:'cancel',onPress:()=>console.log('Cancel Pressed')}
-                ]
-            )
             yield put({
                 type:'Fetch_Menu_Error',
             }) 
@@ -37,9 +30,40 @@ import { Alert } from 'react-native';
     }  
 
  }
-
+ function* fetchMenuDetailsData(action){
+    console.log('qqq'+action.url)
+    try{
+    const response=yield call(Api.fetchDataByGET,action.url)
+         console.log('Saga Resonse'+JSON.stringify(response))
+         if (response.code == '200') {
+             console.log('rohitkfnnfb done')
+             yield put({
+                 type:'Fetch_Menu_Details_Success',
+                 payload:response.data,
+     
+             })
+             
+         } else {
+             console.log(response.meta.message)
+           
+             yield put({
+                 type:'Fetch_Menu_Details_Error',
+             }) 
+       
+         }
+     } catch (error) {
+         yield put({
+             type:'Fetch_Menu_Details_Error',
+         }) 
+     }  
+ 
+  }
+ 
 export default function* MenuSaga(){
     yield takeEvery('Fetch_Menu_Request',fetchMenuData);
+    yield takeEvery('Fetch_Menu_Details_Request',fetchMenuDetailsData);
+
+
 }
 //  / export default function* taxiSaga(){
 // //     yield takeEvery('Fetch_Zone_Request',fetchZone)

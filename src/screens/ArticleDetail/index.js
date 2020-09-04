@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   StatusBar,
   ImageBackground,
+
 } from 'react-native';
 import styles from './styles';
+import { connect } from 'react-redux';
+import {SliderBox} from 'react-native-image-slider-box';
 
 var arr = [
   {
@@ -17,8 +20,20 @@ var arr = [
   },
 ];
 
-export default class ArticleDetail extends React.Component {
+class ArticleDetail extends React.Component {
+  constructor(props) {
+            super(props);
+            this.fetchData();
+        }
+       fetchData=async()=>{
+         const MenuId=this.props.navigation.getParam('MenuId')
+         console.log('hhohoh'+MenuId)
+     this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ MenuId})
+     
+       }
   render() {
+    const {navigation, MenuDetail} = this.props;
+    console.log('any data ',JSON.stringify(MenuDetail))
     return (
       <View style={{flex: 1, backgroundColor: 'black'}}>
         <StatusBar
@@ -27,52 +42,24 @@ export default class ArticleDetail extends React.Component {
           backgroundColor="transparent"
           translucent={true}
         />
-        <ImageBackground
-          source={require('../../assets/Icons/imgIcon.png')}
-          style={styles.ab}
-          imageStyle={{opacity: 0.8}}
-          resizeMode={'stretch'}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={{height: 40, width: 30}}
-              onPress={() => this.props.navigation.openDrawer}>
-              <Image
-                source={require('../../assets/Images/menu2.jpg')}
-                style={styles.menu}
+          <TouchableOpacity style={{width:'100%',height:50,padding:20,marginTop:10}}
+          onPress={()=> this.props.navigation.navigate('Dashboard')}
+          >
+          <Image
+                source={require('../../assets/Icons/arrow.png')}
+                 style={{height:20,width:30,tintColor:'white'}}
                 resizeMode={'cover'}
               />
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              marginTop: 130,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-              paddingRight: 20,
-            }}>
-            <TouchableOpacity
-              style={styles.arrows}
-              onPress={() => this.props.navigation.openDrawer}>
-              <Image
-                style={{height: 20, width: 30}}
-                source={require('../../assets/Icons/left_arrow.png')}
-                resizeMode={'stretch'}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.arrows}
-              onPress={() => this.props.navigation.openDrawer}>
-              <Image
-                style={{height: 20, width: 30}}
-                source={require('../../assets/Icons/right_arrow.png')}
-                resizeMode={'stretch'}
-              />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+          </TouchableOpacity>
+          <View style={styles.image}>
+           <Image source={{"uri" : MenuDetail.image_url}} style={{
+               width: '100%',
+               marginTop: 2,
+               height:'100%'
+           }}>
+             
+           </Image>
+            </View>
         <View
           style={{
             flex: 2 / 3,
@@ -88,7 +75,7 @@ export default class ArticleDetail extends React.Component {
                 fontWeight: 'bold',
                 color: '#FBFBFB',
               }}>
-              Article title here.Article title here
+             {MenuDetail.title}
             </Text>
             <Text
               style={{
@@ -104,13 +91,19 @@ export default class ArticleDetail extends React.Component {
                 fontSize: 18,
                 color: '#FBFBFB',
               }}>
-              This same template will be used for PAGES and POSTS. Header will
-              be the Featured Image with slight opaque overlay. Arrows to
-              navigate back/forth. Pages should support embedded VIMEO videos.
+             {MenuDetail.description}
             </Text>
           </View>
         </View>
       </View>
     );
   }
+
 }
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    MenuDetail: state.MenuDetails,
+  };
+};
+export default connect(mapStateToProps)(ArticleDetail);

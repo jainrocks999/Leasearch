@@ -1,68 +1,51 @@
 import React from 'react';
 import {Text, View, FlatList, Image, StatusBar, Alert} from 'react-native';
-import {createAppContainer} from 'react-navigation';
-import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import styles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { connect } from 'react-redux';
 
-var arr = [
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-  {
-    image: require('../../assets/Images/tree.jpg'),
-    ItemName1: 'Article title here',
-    ItemName2: 'Cotegory | july 15 2020',
-  },
-];
+
 class Article extends React.Component {
-  // details(){
-  //   () => this.props.navigation.navigate('WEBINARS')
-  // }
-
+  constructor(props) {
+    super(props);
+}
   render() {
+    const {navigation, Menu} = this.props;
+    // Alert.alert('msdakjjaflkasjfklasjfskljsjf',JSON.stringify(Menu.title))
     return (
       <View style={{backgroundColor: 'black', paddingTop: 50}}>
         <FlatList
           style={{width: '100%'}}
-          data={arr}
-          showsVerticalScrollIndicator={false}
+          data={Menu}
+              showsVerticalScrollIndicator={false}
+              ItemSeparatorComponent={this.renderSeparator}
+              numColumns={1}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('category')}
               style={{paddingHorizontal: 15, paddingVertical: 20}}>
-              <Image
-                source={item.image}
-                style={{width: '100%', height: 150, borderRadius: 18}}
-              />
-              <View style={{marginTop: -50, paddingHorizontal: 10}}>
-                <Text>{item.ItemName1}</Text>
-                <Text>{item.ItemName2}</Text>
+             <Image source={{"uri" : item.url}} style={{
+               width: '100%',
+               marginTop: 2,
+               height:150
+           }}/>
+              <View style={{marginTop: 50, paddingHorizontal: 10}}>
+                <Text style={{color:'white'}}>{item.title}</Text>
               </View>
             </TouchableOpacity>
           )}
           keyExtractor={(item, index) => index}
         />
+       
       </View>
     );
   }
 }
-export default Article;
+const mapStateToProps = (state) => {
+  console.log('jai jai'+JSON.stringify(state))
+  return {
+    isFetching: state.isFetching,
+    Menu: state.Menu,
+  };
+};
+export default connect(mapStateToProps)(Article);
