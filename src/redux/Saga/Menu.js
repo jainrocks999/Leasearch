@@ -58,116 +58,69 @@ import { Alert } from 'react-native';
      }  
  
   }
+
+//footer data
+  function* fetchFooterData(action){
+   console.log('qqq'+action.url)
+   try{
+   const response=yield call(Api.fetchDataByGET,action.url)
+        console.log('Saga Resonse'+JSON.stringify(response))
+        if (response.code == '200') {
+            console.log('rohitkfnnfb done')
+            yield put({
+                type:'Fetch_Footer_Success',
+                payload:response.data,
+    
+            })
+            
+        } else {
+            console.log(response.meta.message)
+            yield put({
+                type:'Fetch_Footer_Error',
+            }) 
+      
+        }
+    } catch (error) {
+        yield put({
+            type:'Fetch_Footer_Error',
+        }) 
+    }  
+
+ }
+
+//news feed
+ function* fetchNewsFeed(action){
+   console.log('qqq'+action.url)
+   try{
+   const response=yield call(Api.fetchDataByGET,action.url)
+        console.log('Saga Resonse'+JSON.stringify(response))
+        if (response.code == '200') {
+            console.log('rohitkfnnfb done'+response.data)
+            yield put({
+                type:'Fetch_News_Feed_Success',
+                payload:response.data,
+    
+            })
+            
+        } else {
+            console.log(response.meta.message)
+            yield put({
+                type:'Fetch_News_Feed_Error',
+            }) 
+      
+        }
+    } catch (error) {
+        yield put({
+            type:'Fetch_News_Feed_Error',
+        }) 
+    }  
+
+ }
  
 export default function* MenuSaga(){
     yield takeEvery('Fetch_Menu_Request',fetchMenuData);
     yield takeEvery('Fetch_Menu_Details_Request',fetchMenuDetailsData);
-
+yield takeEvery('Fetch_Footer_Request',fetchFooterData);
+yield takeEvery('Fetch_News_Feed_Request',fetchNewsFeed);
 
 }
-//  / export default function* taxiSaga(){
-// //     yield takeEvery('Fetch_Zone_Request',fetchZone)
-// //     yield takeEvery('Fetch_Taxi_Request',fetchTaxi)
-// //     yield takeEvery('Request_Transfer_Request',requestTransfer)
-// // }
-// //         
-// // function* fetchTaxi(action) {
-// //     try {
-// //         const formdata=new FormData();
-// //         formdata.append('device_token',action.devicetoken)
-// //         formdata.append('device_id',action.deviceid)
-// //         formdata.append('lang',action.lang)
-// //         formdata.append('country',action.country)
-// //         formdata.append('module_id',action.moduleid)
-// //         formdata.append('slug',action.slug)
-// //         formdata.append('cat_id',action.catid)
-          
-// //         const response=yield call(Api.fetchDataByPOST,action.url,formdata)
-// //         console.log(response)
-// //         if (response.meta.code == '200') {
-// //             yield put({
-// //                 type:'Fetch_Taxi_Success',
-// //                 payload:response.data.post,
-// //             })
-            
-// //         } else {
-// //             console.log(response.meta.message)
-// //             Alert.alert(
-// //                 'Explored',
-// //                 response.meta.message,
-// //                 [
-// //                     {text:'Ok',style:'cancel',onPress:()=>console.log('Cancel Pressed')}
-// //                 ]
-// //             )
-// //             yield put({
-// //                 type:'Fetch_Taxi_Error',
-// //             }) 
-// //         }
-       
-// //     } catch (error) {
-// //         console.log(error)
-     
-// //         yield put({
-// //             type:'Fetch_Taxi_Error',
-// //         }) 
-// //     }  
-// // }
-
-// // function* requestTransfer(action) {
-// //     try {
-// //         const formdata=new FormData();
-// //         formdata.append('device_token',action.devicetoken)
-// //         formdata.append('device_id',action.deviceid)
-// //         formdata.append('lang',action.lang)
-// //         formdata.append('country',action.country)
-// //         formdata.append('date',action.date)
-// //         formdata.append('pick_time',action.time)
-// //         formdata.append('flight_number',action.flitghtno)
-// //         formdata.append('drop_off',action.dropoff)
-// //         formdata.append('pick_up',action.pickup)
-// //         formdata.append('people',action.noofpeople)
-// //         formdata.append('luggage',action.luggage)
-// //         formdata.append('comments',action.comment)
-// //         formdata.append('item_slug',action.slug)
-// //         formdata.append('uid',action.uid)
-
-// //         const response=yield call(Api.fetchDataByPOST,action.url,formdata)
-// //         console.log(response)
-// //         if (response.meta.code == '200') {
-// //             Alert.alert(
-// //                 'Explored',
-// //                 response.meta.message,
-// //                 [
-// //                     {text:'Ok',style:'cancel',onPress:()=>console.log('Cancel Pressed')}
-// //                 ]
-// //             )
-// //             yield put({
-// //                 type:'Request_Transfer_Success',
-// //             })
-// //             action.navigation.navigate('Home')
-// //         } else {
-// //             console.log(response.meta.message)
-// //             Alert.alert(
-// //                 'Explored',
-// //                 response.meta.message,
-// //                 [
-// //                     {text:'Ok',style:'cancel',onPress:()=>console.log('Cancel Pressed')}
-// //                 ]
-// //             )
-// //             yield put({
-// //                 type:'Request_Transfer_Error',
-// //             }) 
-// //         }
-       
-// //     } catch (error) {
-// //         console.log(error)
-     
-// //         yield put({
-// //             type:'Request_Transfer_Error',
-// //         }) 
-// //     }  
-// // }
-
-
-
-

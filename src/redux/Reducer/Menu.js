@@ -2,6 +2,8 @@ initialstate={
     isFetching:false,
     Menu:[],
     MenuDetails:null,
+    NewsFeed:[],
+    Footer:[],
 }
 export default (state=initialstate,action)=>{
 switch (action.type){
@@ -20,7 +22,25 @@ switch (action.type){
     return{...state,isFetching:false,MenuDetails:action.payload}   
     case 'Fetch_Menu_Details_Error':
     return{...state,isFetching:false}
+
+    //News feed data
+    case 'Fetch_News_Feed_Request':
+    return {...state,isFetching:true}
+    case 'Fetch_News_Feed_Success':
+    return {...state,isFetching:false,NewsFeed:action.payload}
+    case 'Fetch_News_Feed_Error':
+    return{...state,isFetching:false}
+
+//Footer data
+    case 'Fetch_Footer_Request':
+    return {...state,isFetching:true}
+    case 'Fetch_Footer_Success':
+    return {...state,isFetching:false,Footer:action.payload}
+    case 'Fetch_Footer_Error':
+    return{...state,isFetching:false}
+
     default:
+
              return state;
 }
 }

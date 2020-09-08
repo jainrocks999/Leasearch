@@ -15,20 +15,14 @@ import { connect } from 'react-redux';
 
  class SplashScreen extends React.Component {
     constructor(props) {
-console.log('vbfjvbjkfbvfvbjf')
         super(props);
-        this.state = {
-            name: '',
-            mobile: '',
-            Number:'',
-           // pimage: require('../images/user.png'),
-            currentpage: '',
-        }
         this.fetchData();
     }
    fetchData=async()=>{
- this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
-  setTimeout(() => this.props.navigation.navigate('AppStack'), 2000);
+   this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
+   this.props.dispatch({type:'Fetch_Footer_Request',url:'footer/icons'})
+   this.props.dispatch({type:'Fetch_News_Feed_Request',url:'news'})
+  setTimeout(() => this.props.navigation.navigate('HomeScreenPage'), 2000);
    }
 
   render() {

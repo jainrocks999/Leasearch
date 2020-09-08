@@ -37,6 +37,21 @@ import drawerPage from '../screens/DrawerPage';
 import HomeScreen from '../screens/DrawerHomeScreen';
 import ArticleDetail from '../screens/ArticleDetail/index';
 import SearchScreen from '../screens/SearchScreen/index';
+import HomeScreenPage from '../screens/HomeScreen';
+
+
+const HomeScreenStack = createStackNavigator({
+  HomeScreenPage:{
+    screen:HomeScreenPage
+  }
+},
+ {
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        header: false,
+      };
+    },
+  },)
 
 
 const ArticleStack = createStackNavigator({
@@ -112,22 +127,24 @@ const DrawerStack = createStackNavigator(
     },
   },
 );
-const AppStack = createDrawerNavigator(
-  {
-    Dashboard: DrawerStack,
-    Article:detailStack
-  },
-  {
-    initialRouteName: 'Dashboard',
-    contentComponent: drawerPage,
-  },
-);
+// const AppStack = createDrawerNavigator(
+//   {
+//     Dashboard: DrawerStack,
+//     Article:detailStack
+//   },
+//   {
+//     initialRouteName: 'Dashboard',
+//     contentComponent: drawerPage,
+//   },
+// );
 const AuthStack = createSwitchNavigator({
   SplashScreen: SplashScreen,
+  HomeScreenStack:HomeScreenStack,
+
   //Demo: DemoScreen,
   Auth: AuthNavigator,
   //Tab: bottomTab,
-  AppStack: AppStack,
+ // AppStack: AppStack,
   // home: drawerStack,
   Article: ArticleStack,
   Details: {screen: ArticleDetail},

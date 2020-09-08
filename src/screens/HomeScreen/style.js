@@ -4,7 +4,6 @@ export default StyleSheet.create({
     backgroundColor: 'black',
     padding: 10,
     flex: 1,
-   
   },
   icon: {
     width: 40,
@@ -19,26 +18,15 @@ export default StyleSheet.create({
     marginTop: 19,
   },
   view1: {
-
-width:'100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   view2: {
     width: 40,
     height: 40,
-   // backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 10,
-  },
-
-    view21: {
-    width: 30,
-    height: 30,
-   // backgroundColor: 'white',
-    
+    backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 10,
   },
@@ -50,7 +38,7 @@ width:'100%',
   playIcon: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 4,
+    padding: 20,
   },
   slider: {
     borderWidth: 1,
@@ -64,10 +52,9 @@ width:'100%',
     fontSize: 20,
   },
   iconMenu: {
-    width: 30,
+    width: 40,
     height: 30,
     tintColor: 'white',
-    alignContent: 'center',
   },
   iconSearch: {
     flexDirection: 'row',
@@ -89,15 +76,21 @@ width:'100%',
   list: {
     flex: 1,
     flexDirection: 'column',
-    margin: 5,
-    backgroundColor: 'grey',
-    borderRadius: 5,
-    height: 100,
-    // opacity: 0.2,
+tintColor:'white',
+padding:10,
+    alignContent:'center',
+   justifyContent: 'center',
+  },
+  list1: {
+    flex: 1,
+    flexDirection: 'column',
+tintColor:'white',
+borderRadius:10,
+margin:8,
+    alignContent:'center',
     justifyContent: 'center',
   },
 
-  //////////////////
 
   viewContainer: {
     width: 150,
@@ -122,9 +115,10 @@ width:'100%',
     marginTop: -50,
   },
   imageContainer: {
-    width: '100%',
-    height: 200,
+    width: '99%',
+    height: 160,
     padding: 10,
+    borderRadius:10,
     marginTop: 10,
   },
   image: {
@@ -150,7 +144,7 @@ width:'100%',
     textAlign: 'center',
   },
   menu: {
-    width: 40,
+    width: 30,
     height: 30,
     tintColor: 'white',
     alignContent: 'center',
