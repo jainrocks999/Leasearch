@@ -1,40 +1,27 @@
-import React from 'react';
+import React, {Component} from 'react';
+import Video from 'react-native-video';
 import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  FlatList,
-  TextInput,
-  StatusBar,
-  ScrollView,
-  Alert,
   TouchableWithoutFeedback,
   TouchableHighlight,
+  ImageBackground,
   PanResponder,
-  Animated,
-  Easing,
   StyleSheet,
-  Dimensions,
+  Animated,
   SafeAreaView,
+  Easing,
+  Image,
+  View,
+  Text,
 } from 'react-native';
-import styless from './style';
-import {withNavigation, DrawerActions} from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {connect} from 'react-redux';
-import Modal from 'react-native-modal';
 import padStart from 'lodash/padStart';
-import Video from 'react-native-video';
-const {height} = Dimensions.get('window');
 
-let listarry = [];
-class SearchScreen extends React.Component {
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+export default class VideoPlayer extends Component {
   static defaultProps = {
+    toggleResizeModeOnFullscreen: true,
+    controlAnimationTiming: 500,
     doubleTapTime: 130,
     playInBackground: false,
+    playWhenInactive: false,
     resizeMode: 'contain',
     isFullscreen: false,
     showOnStart: true,
@@ -54,29 +41,6 @@ class SearchScreen extends React.Component {
      * methods and listeners in this class
      */
     this.state = {
-      listdata: [],
-      Visible: true,
-      itemValue: '',
-      images: [
-        // require('../../assets/Icons/imgIcon.png'), // Local image
-        'https://source.unsplash.com/1024x768/?nature',
-        'https://source.unsplash.com/1024x768/?water',
-        'https://source.unsplash.com/1024x768/?girl',
-        'https://source.unsplash.com/1024x768/?tree', // Network image
-      ],
-
-      screenHeight: 0,
-      Images: null,
-      Title: '',
-      TamilImageArray: [],
-      status: 'False',
-      isVisible: false,
-      Isvimeo: false,
-      fullScreen: false,
-      Descriotion: '',
-      ContactArray: [],
-      Barcode: '',
-
       // Video
       resizeMode: this.props.resizeMode,
       paused: this.props.paused,
@@ -104,8 +68,6 @@ class SearchScreen extends React.Component {
       error: false,
       duration: 0,
     };
-
-    this.fetchData();
 
     /**
      * Any options that can be set at init.
@@ -197,15 +159,15 @@ class SearchScreen extends React.Component {
   }
 
   /**
-  | -------------------------------------------------------
-  | Events
-  | -------------------------------------------------------
-  |
-  | These are the events that the <Video> component uses
-  | and can be overridden by assigning it as a prop.
-  | It is suggested that you override onEnd.
-  |
-  */
+      | -------------------------------------------------------
+      | Events
+      | -------------------------------------------------------
+      |
+      | These are the events that the <Video> component uses
+      | and can be overridden by assigning it as a prop.
+      | It is suggested that you override onEnd.
+      |
+      */
 
   /**
    * When load starts we display a loading icon
@@ -343,16 +305,16 @@ class SearchScreen extends React.Component {
   }
 
   /**
-  | -------------------------------------------------------
-  | Methods
-  | -------------------------------------------------------
-  |
-  | These are all of our functions that interact with
-  | various parts of the class. Anything from
-  | calculating time remaining in a video
-  | to handling control operations.
-  |
-  */
+      | -------------------------------------------------------
+      | Methods
+      | -------------------------------------------------------
+      |
+      | These are all of our functions that interact with
+      | various parts of the class. Anything from
+      | calculating time remaining in a video
+      | to handling control operations.
+      |
+      */
 
   /**
    * Set a timeout when the controls are shown
@@ -728,15 +690,15 @@ class SearchScreen extends React.Component {
   }
 
   /**
-  | -------------------------------------------------------
-  | React Component functions
-  | -------------------------------------------------------
-  |
-  | Here we're initializing our listeners and getting
-  | the component ready using the built-in React
-  | Component methods
-  |
-  */
+      | -------------------------------------------------------
+      | React Component functions
+      | -------------------------------------------------------
+      |
+      | Here we're initializing our listeners and getting
+      | the component ready using the built-in React
+      | Component methods
+      |
+      */
 
   /**
    * Before mounting, init our seekbar and volume bar
@@ -767,25 +729,10 @@ class SearchScreen extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    header: null,
-  };
-  state = {
-    screenHeight: 0,
-    Images: null,
-    Title: '',
-    TamilImageArray: [],
-    status: 'False',
-    isVisible: false,
-    Isvimeo: false,
-    fullScreen: false,
-    Descriotion: '',
-    ContactArray: [],
-    Barcode: '',
-  };
-  onContentSizeChange = (contentWidth, contentHeight) => {
-    this.setState({screenHeight: contentHeight});
-  };
+  /**
+   * Upon mounting, calculate the position of the volume
+   * bar based on the volume property supplied to it.
+   */
   componentDidMount() {
     const position = this.calculateVolumePositionFromVolume();
     let state = this.state;
@@ -807,33 +754,11 @@ class SearchScreen extends React.Component {
         }),
       );
   }
-  // renderData=()=>{
-  //     if(this.state.status == 'True'){
-  //          return (
-  //              <View style={{flex:2}}>
-  //              <Text>Hi djhkjh</Text>
-  //              </View>
-  //          )
-  //     }
-  // }
 
-  onFullScreen = (fullScreen) => {
-    console.log('fullscreen ', fullScreen);
-    this.setState({fullScreen});
-  };
-
-  play = () => {
-    this.play.playVideo();
-  };
-  pause = () => {
-    console.log('hdjhcd');
-    this.play.pauseVideo();
-  };
-
-  seekTo = (s) => {
-    this.player.seekTo(s);
-  };
-
+  /**
+   * When the component is about to unmount kill the
+   * timeout less it fire in the prev/next scene
+   */
   componentWillUnmount() {
     this.mounted = false;
     this.clearControlTimeout();
@@ -966,16 +891,16 @@ class SearchScreen extends React.Component {
   }
 
   /**
-  | -------------------------------------------------------
-  | Rendering
-  | -------------------------------------------------------
-  |
-  | This section contains all of our render methods.
-  | In addition to the typical React render func
-  | we also have all the render methods for
-  | the controls.
-  |
-  */
+      | -------------------------------------------------------
+      | Rendering
+      | -------------------------------------------------------
+      |
+      | This section contains all of our render methods.
+      | In addition to the typical React render func
+      | we also have all the render methods for
+      | the controls.
+      |
+      */
 
   /**
    * Standard render control function that handles
@@ -1030,7 +955,7 @@ class SearchScreen extends React.Component {
           },
         ]}>
         <ImageBackground
-          source={require('../../assets/img/top-vignette.png')}
+          source={require('../assets/img/top-vignette.png')}
           style={[styles.controls.column]}
           imageStyle={[styles.controls.vignette]}>
           <SafeAreaView style={styles.controls.topControlGroup}>
@@ -1051,7 +976,7 @@ class SearchScreen extends React.Component {
   renderBack() {
     return this.renderControl(
       <Image
-        source={require('../../assets/img/back.png')}
+        source={require('../assets/img/back.png')}
         style={styles.controls.back}
       />,
       this.events.onBack,
@@ -1076,7 +1001,7 @@ class SearchScreen extends React.Component {
           {...this.player.volumePanResponder.panHandlers}>
           <Image
             style={styles.volume.icon}
-            source={require('../../assets/img/volume.png')}
+            source={require('../assets/img/volume.png')}
           />
         </View>
       </View>
@@ -1089,8 +1014,8 @@ class SearchScreen extends React.Component {
   renderFullscreen() {
     let source =
       this.state.isFullscreen === true
-        ? require('../../assets/img/shrink.png')
-        : require('../../assets/img/expand.png');
+        ? require('../assets/img/shrink.png')
+        : require('../assets/img/expand.png');
     return this.renderControl(
       <Image source={source} />,
       this.methods.toggleFullscreen,
@@ -1122,7 +1047,7 @@ class SearchScreen extends React.Component {
           },
         ]}>
         <ImageBackground
-          source={require('../../assets/img/bottom-vignette.png')}
+          source={require('../assets/img/bottom-vignette.png')}
           style={[styles.controls.column]}
           imageStyle={[styles.controls.vignette]}>
           {seekbarControl}
@@ -1184,8 +1109,8 @@ class SearchScreen extends React.Component {
   renderPlayPause() {
     let source =
       this.state.paused === true
-        ? require('../../assets/img/play.png')
-        : require('../../assets/img/pause.png');
+        ? require('../assets/img/play.png')
+        : require('../assets/img/pause.png');
     return this.renderControl(
       <Image source={source} />,
       this.methods.togglePlayPause,
@@ -1231,7 +1156,7 @@ class SearchScreen extends React.Component {
       return (
         <View style={styles.loader.container}>
           <Animated.Image
-            source={require('../../assets/img/loader-icon.png')}
+            source={require('../assets/img/loader-icon.png')}
             style={[
               styles.loader.icon,
               {
@@ -1257,7 +1182,7 @@ class SearchScreen extends React.Component {
       return (
         <View style={styles.error.container}>
           <Image
-            source={require('../../assets/img/error-icon.png')}
+            source={require('../assets/img/error-icon.png')}
             style={styles.error.icon}
           />
           <Text style={styles.error.text}>Video unavailable</Text>
@@ -1267,268 +1192,47 @@ class SearchScreen extends React.Component {
     return null;
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     listdata: [],
-  //     Visible: true,
-  //     itemValue: '',
-  //     images: [
-  //       // require('../../assets/Icons/imgIcon.png'), // Local image
-  //       'https://source.unsplash.com/1024x768/?nature',
-  //       'https://source.unsplash.com/1024x768/?water',
-  //       'https://source.unsplash.com/1024x768/?girl',
-  //       'https://source.unsplash.com/1024x768/?tree', // Network image
-  //     ],
-  //   };
-  //   this.fetchData();
-  // }
-
-  fetchData = async () => {
-    const {Menu} = this.props;
-    let keydata = this.props.navigation.getParam('Key');
-    if (keydata == undefined) {
-      keydata = 'Search';
-    }
-    console.log('kapil bb' + Menu);
-    console.log('kapil bb' + keydata);
-    Menu.map(
-      (item, key) => listarry.push(item.sub_pages),
-      //  this.setState({
-      //    listdata:item.sub_pages
-      //  })
-    );
-  };
-  logdata(item) {
-    // console.log('hjhdfhjdbf'+item.title)
-    console.log('hjhdfhjdbf' + this.state.Visible);
-    if (this.state.Visible == true) {
-      this.setState({
-        Visible: false,
-        itemValue: item.title,
-      });
-    } else {
-      this.setState({
-        Visible: true,
-        itemValue: item.title,
-      });
-    }
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  renderdata = (item) => {
-    console.log('kkoooko' + item.title);
-    if (this.state.Visible == true) {
-      if (this.state.itemValue == item.title) {
-        return (
-          <View
-            style={{
-              width: '100%',
-              flex: 1,
-              backgroundColor: '#1f1f1f',
-              paddingHorizontal: 20,
-              paddingVertical: 10,
-            }}>
-            <FlatList
-              data={item.sub_pages}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({item}) => (
-                <View style={{alignItems: 'center', marginTop: 10}}>
-                  <TouchableOpacity
-                    style={{width: '100%'}}
-                    onPress={() => this.logdata(item)}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: '100%',
-                        alignItems: 'center',
-                      }}>
-                      <View style={styless.view21}>
-                        <Image
-                          source={require('../../assets/Icons/a_icon.png')}
-                          style={{
-                            height: '90%',
-                            width: '90%',
-                          }}
-                        />
-                      </View>
-                      <View style={{marginLeft: 10}}>
-                        <Text style={{color: 'white', fontSize: 12}}>
-                          {item.title}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              )}
-              keyExtractor={(item, index) => index}
-            />
-          </View>
-        );
-      } else {
-      }
-    } else {
-    }
-  };
-
+  /**
+   * Provide all of our options and render the whole component.
+   */
   render() {
-    console.log('kapil bhai' + listarry[0]);
-    const {Menu} = this.props;
     return (
-      <View style={styless.container}>
-        <StatusBar
-          barStyle="light-content"
-          hidden={false}
-          backgroundColor="transparent"
-          translucent={true}
-        />
-        <TouchableOpacity
-          style={{height: 40, width: 30, marginTop: 15}}
-          onPress={() => {
-            this.props.navigation.navigate('HomeScreenPage');
-          }}>
-          <Image
-            source={require('../../assets/Images/pp.png')}
-            resizeMode={'stretch'}
-            style={styless.iconMenu}
+      <TouchableWithoutFeedback
+        onPress={this.events.onScreenTouch}
+        style={[styles.player.container, this.styles.containerStyle]}>
+        <View style={[styles.player.container, this.styles.containerStyle]}>
+          <Video
+            {...this.props}
+            ref={(videoPlayer) => (this.player.ref = videoPlayer)}
+            resizeMode={this.state.resizeMode}
+            volume={this.state.volume}
+            paused={this.state.paused}
+            muted={this.state.muted}
+            rate={this.state.rate}
+            onLoadStart={this.events.onLoadStart}
+            onProgress={this.events.onProgress}
+            onError={this.events.onError}
+            onLoad={this.events.onLoad}
+            onEnd={this.events.onEnd}
+            onSeek={this.events.onSeek}
+            style={[styles.player.video, this.styles.videoStyle]}
+            source={{uri: this.state.videoUrl}}
           />
-        </TouchableOpacity>
-
-        <ScrollView>
-          <View style={styless.iconSearch}>
-            <Image
-              source={require('../../assets/Icons/search_icon.png')}
-              style={styless.iconSearch1}
-              resizeMode={'contain'}
-            />
-
-            <TextInput
-              placeholder="Search for all Categories,topic etc"
-              placeholderTextColor="grey"
-              style={styless.input}
-            />
-          </View>
-          <View style={styless.text}>
-            <Text style={styless.all}>SEARCHES</Text>
-            <View style={styless.slider}></View>
-          </View>
-          <FlatList
-            style={{marginTop: 10}}
-            data={listarry[0]}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingVertical: 15,
-                  backgroundColor: '#141414',
-                }}>
-                <View style={styless.view1}>
-                  <TouchableOpacity onPress={() => this.logdata(item)}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <View style={styless.view2}>
-                        <Image
-                          source={{
-                            uri:
-                              'http://app.lea.one/wp-content/uploads/2020/08/microphone.png',
-                          }}
-                          style={{
-                            width: '99%',
-                            height: '99%',
-                            borderRadius: 10,
-                          }}
-                        />
-                      </View>
-
-                      <Text
-                        style={{
-                          color: 'white',
-                          marginLeft: 20,
-                          fontSize: 14,
-                          textAlign: 'center',
-                        }}>
-                        {item.title}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => this.setState({Isvimeo: true})}>
-                    <Image
-                      style={{
-                        height: 25,
-                        width: 25,
-                        // alignSelf: 'center',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                      source={require('../../assets/Icons/list_icon.png')}
-                    />
-
-                    {/* <Text style={{color: 'white', alignSelf: 'center'}}>Play</Text> */}
-                  </TouchableOpacity>
-                </View>
-                {this.renderdata(item)}
-              </View>
-            )}
-            keyExtractor={(item, index) => index}
-          />
-        </ScrollView>
-        <Modal isVisible={this.state.Isvimeo}>
-          <TouchableWithoutFeedback
-            onPress={this.events.onScreenTouch}
-            style={[styles.player.container, this.styles.containerStyle]}>
-            <View style={[styles.player.container, this.styles.containerStyle]}>
-              <Video
-                {...this.props}
-                ref={(videoPlayer) => (this.player.ref = videoPlayer)}
-                resizeMode={this.state.resizeMode}
-                volume={this.state.volume}
-                paused={this.state.paused}
-                muted={this.state.muted}
-                rate={this.state.rate}
-                onLoadStart={this.events.onLoadStart}
-                onProgress={this.events.onProgress}
-                onError={this.events.onError}
-                onLoad={this.events.onLoad}
-                onEnd={this.events.onEnd}
-                onSeek={this.events.onSeek}
-                style={[styles.player.video, this.styles.videoStyle]}
-                source={{uri: this.state.videoUrl}}
-              />
-              {this.renderError()}
-              {this.renderLoader()}
-              {this.renderTopControls()}
-              {this.renderBottomControls()}
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
-      </View>
+          {this.renderError()}
+          {this.renderLoader()}
+          {this.renderTopControls()}
+          {this.renderBottomControls()}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    isFetching: state.isFetching,
-    Menu: state.Menu,
-    // Footer:state.Footer,
-    // NewsFeed:state.NewsFeed,
-  };
-};
-export default connect(mapStateToProps)(SearchScreen);
 
+/**
+ * This object houses our styles. There's player
+ * specific styles and control specific ones.
+ * And then there's volume/seeker styles.
+ */
 const styles = {
   player: StyleSheet.create({
     container: {

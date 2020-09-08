@@ -39,38 +39,42 @@ import ArticleDetail from '../screens/ArticleDetail/index';
 import SearchScreen from '../screens/SearchScreen/index';
 import HomeScreenPage from '../screens/HomeScreen';
 
+import demo from '../screens/demo1';
 
-const HomeScreenStack = createStackNavigator({
-  HomeScreenPage:{
-    screen:HomeScreenPage
-  }
-},
- {
+const HomeScreenStack = createStackNavigator(
+  {
+    HomeScreenPage: {
+      screen: HomeScreenPage,
+    },
+  },
+  {
     defaultNavigationOptions: ({navigation}) => {
       return {
         header: false,
       };
     },
-  },)
-
+  },
+);
 
 const ArticleStack = createStackNavigator({
   artile: {
     screen: Article,
   },
-  web:{
-    screen:Webinar,navigationOptions:{
-      headerShown:false
-    }
-  }
+  web: {
+    screen: Webinar,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
 });
-const detailStack=createStackNavigator({
-  detail:{
-    screen:ArticleDetail,navigationOptions:{
-      headerShown:false
-    }
-  }
-})
+const detailStack = createStackNavigator({
+  detail: {
+    screen: ArticleDetail,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+});
 const SearchStack = createStackNavigator({
   SearchPage: {
     screen: SearchScreen,
@@ -138,13 +142,13 @@ const DrawerStack = createStackNavigator(
 //   },
 // );
 const AuthStack = createSwitchNavigator({
+  //Demo: demo,
   SplashScreen: SplashScreen,
-  HomeScreenStack:HomeScreenStack,
+  HomeScreenStack: HomeScreenStack,
 
-  //Demo: DemoScreen,
   Auth: AuthNavigator,
   //Tab: bottomTab,
- // AppStack: AppStack,
+  // AppStack: AppStack,
   // home: drawerStack,
   Article: ArticleStack,
   Details: {screen: ArticleDetail},

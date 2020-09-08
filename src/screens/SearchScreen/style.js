@@ -2,9 +2,8 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     backgroundColor: 'black',
-    padding: 10,
+    paddingVertical: 10,
     flex: 1,
-   
   },
   icon: {
     width: 40,
@@ -19,27 +18,29 @@ export default StyleSheet.create({
     marginTop: 19,
   },
   view1: {
+    paddingHorizontal: 15,
 
-width:'100%',
+    width: '99%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
+
+    // borderWidth: 1,
+    // borderColor: '#fff',
   },
   view2: {
-    width: 40,
-    height: 40,
-   // backgroundColor: 'white',
-    borderWidth: 1,
+    width: 60,
+    height: 60,
+    // backgroundColor: 'white',
+    //borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
   },
 
-    view21: {
-    width: 30,
-    height: 30,
-   // backgroundColor: 'white',
-    
-    borderWidth: 1,
+  view21: {
+    width: 15,
+    height: 15,
     borderRadius: 10,
   },
   article: {
@@ -53,7 +54,7 @@ width:'100%',
     padding: 4,
   },
   slider: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: 'orange',
     marginHorizontal: 120,
     marginTop: 5,
@@ -83,8 +84,10 @@ width:'100%',
   input: {
     color: 'grey',
     alignSelf: 'center',
-    marginRight: 30,
+    paddingRight: 30,
     fontSize: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#fafafa',
   },
   list: {
     flex: 1,
@@ -144,6 +147,7 @@ width:'100%',
     justifyContent: 'center',
   },
   text: {
+    marginVertical: 20,
     fontSize: 14,
     fontWeight: 'bold',
     color: 'white',
