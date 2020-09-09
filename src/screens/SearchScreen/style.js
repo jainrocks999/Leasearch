@@ -67,16 +67,20 @@ export default StyleSheet.create({
   iconMenu: {
     width: 30,
     height: 30,
+    margin:10,
     tintColor: 'white',
     alignContent: 'center',
   },
   iconSearch: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+marginLeft:10,
+    justifyContent: 'flex-start',
   },
   iconSearch1: {
-    width: 30,
-    height: 30,
+    width: 26,
+    height: 26,
+    margin:4,
+    padding:4,
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: 7,

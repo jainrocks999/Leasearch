@@ -35,11 +35,11 @@ import Article from '../screens/Article/index';
 import drawerPage from '../screens/DrawerPage';
 //import Saved from '../screens/Saved';
 import HomeScreen from '../screens/DrawerHomeScreen';
-import ArticleDetail from '../screens/ArticleDetail/index';
-import SearchScreen from '../screens/SearchScreen/index';
+import ArticleDetail from '../screens/ArticleDetail';
+import SearchScreen from '../screens/SearchScreen';
 import HomeScreenPage from '../screens/HomeScreen';
 
-import demo from '../screens/demo1';
+//import demo from '../screens/demo1';
 
 const HomeScreenStack = createStackNavigator(
   {

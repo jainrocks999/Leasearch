@@ -45,8 +45,18 @@ class HomeScreen extends React.Component {
   }
 
 openurl=(data)=>{
-  console.log('nbcjhdbcjdbc'+data.link)
- Linking.openURL(data.link);
+  console.log('nbcjhdbcjdbc'+data)
+  const {navigation, Menu,Footer,NewsFeed} = this.props;
+ NewsFeed.map((item,index) =>{
+   console.log('jai ho'+index)
+    if(index == data){
+      console.log('link'+item.link)
+     Linking.openURL(item.link);
+    }
+
+
+  })
+ 
 }
 
   render() {
@@ -54,7 +64,8 @@ openurl=(data)=>{
     const {navigation, Menu,Footer,NewsFeed} = this.props;
    NewsFeed.map((item, key) => (
     arr.push(item.image)
- ))
+    
+    ))
 
 
     return (
@@ -101,9 +112,12 @@ openurl=(data)=>{
               <SliderBox
                 images={arr}
                 //sliderBoxHeight={300}
-                onCurrentImagePressed={(index) =>
-               // this.openurl(arr)
-                 console.warn(`image ${index} pressed`)
+               // onPress={this.openurl(arr)}
+              // disableOnPress={true}
+                onCurrentImagePressed={(arr) =>
+             // Alert.alert(arr)
+             this.openurl(arr)
+              //   console.log('image $'+arr)
                 }
                 dotColor="#FFEE58"
                 inactiveDotColor="#90A4AE"

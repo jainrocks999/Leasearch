@@ -29,6 +29,7 @@ import Video from 'react-native-video';
 const {height} = Dimensions.get('window');
 
 let listarry = [];
+let totalcount='';
 class SearchScreen extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,7 +56,7 @@ class SearchScreen extends React.Component {
      */
     this.state = {
       listdata: [],
-      Visible: true,
+      Visible: false,
       itemValue: '',
       images: [
         // require('../../assets/Icons/imgIcon.png'), // Local image
@@ -558,7 +559,11 @@ class SearchScreen extends React.Component {
   _onBack() {
     if (this.props.navigator && this.props.navigator.pop) {
       this.props.navigator.pop();
+     
     } else {
+      this.setState({
+        Isvimeo:false
+      })
       console.warn(
         'Warning: _onBack requires navigator property to function. Either modify the onBack prop or pass a navigator prop',
       );
@@ -1300,21 +1305,7 @@ class SearchScreen extends React.Component {
       //  })
     );
   };
-  logdata(item) {
-    // console.log('hjhdfhjdbf'+item.title)
-    console.log('hjhdfhjdbf' + this.state.Visible);
-    if (this.state.Visible == true) {
-      this.setState({
-        Visible: false,
-        itemValue: item.title,
-      });
-    } else {
-      this.setState({
-        Visible: true,
-        itemValue: item.title,
-      });
-    }
-  }
+
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1322,8 +1313,6 @@ class SearchScreen extends React.Component {
 
   renderdata = (item) => {
     console.log('kkoooko' + item.title);
-    if (this.state.Visible == true) {
-      if (this.state.itemValue == item.title) {
         return (
           <View
             style={{
@@ -1340,7 +1329,7 @@ class SearchScreen extends React.Component {
                 <View style={{alignItems: 'center', marginTop: 10}}>
                   <TouchableOpacity
                     style={{width: '100%'}}
-                    onPress={() => this.logdata(item)}>
+                   >
                     <View
                       style={{
                         flexDirection: 'row',
@@ -1369,15 +1358,21 @@ class SearchScreen extends React.Component {
             />
           </View>
         );
-      } else {
-      }
-    } else {
-    }
+
   };
 
   render() {
     console.log('kapil bhai' + listarry[0]);
     const {Menu} = this.props;
+     listarry[0].map(
+      (item, key) =>
+      console.log('ndjndjn'+item.sub_pages.length)
+      // listarry.push(item.sub_pages.length),
+      //  this.setState({
+      //    listdata:item.sub_pages
+      //  })
+    );
+
     return (
       <View style={styless.container}>
         <StatusBar
@@ -1401,9 +1396,9 @@ class SearchScreen extends React.Component {
         <ScrollView>
           <View style={styless.iconSearch}>
             <Image
-              source={require('../../assets/Icons/search_icon.png')}
+              source={require('../../assets/Images/search.png')}
               style={styless.iconSearch1}
-              resizeMode={'contain'}
+              resizeMode={'center'}
             />
 
             <TextInput
@@ -1431,7 +1426,7 @@ class SearchScreen extends React.Component {
                   backgroundColor: '#141414',
                 }}>
                 <View style={styless.view1}>
-                  <TouchableOpacity onPress={() => this.logdata(item)}>
+                 
                     <View
                       style={{
                         flexDirection: 'row',
@@ -1451,7 +1446,7 @@ class SearchScreen extends React.Component {
                           }}
                         />
                       </View>
-
+<View>
                       <Text
                         style={{
                           color: 'white',
@@ -1461,8 +1456,18 @@ class SearchScreen extends React.Component {
                         }}>
                         {item.title}
                       </Text>
+                       <Text
+                        style={{
+                          color: 'white',
+                          marginLeft: 18,
+                          fontSize: 12,
+                        
+                        }}>
+                        {item.sub_pages.length} Article
+                      </Text>
+                      </View>
                     </View>
-                  </TouchableOpacity>
+                 
 
                   <TouchableOpacity
                     onPress={() => this.setState({Isvimeo: true})}>
@@ -1505,6 +1510,7 @@ class SearchScreen extends React.Component {
                 onLoad={this.events.onLoad}
                 onEnd={this.events.onEnd}
                 onSeek={this.events.onSeek}
+                onBack={this.state.Isvimeo}
                 style={[styles.player.video, this.styles.videoStyle]}
                 source={{uri: this.state.videoUrl}}
               />
