@@ -51,6 +51,8 @@ openurl=(data)=>{
    console.log('jai ho'+index)
     if(index == data){
       console.log('link'+item.link)
+
+      
      Linking.openURL(item.link);
     }
 
