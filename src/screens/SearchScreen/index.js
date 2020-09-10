@@ -29,7 +29,7 @@ import Video from 'react-native-video';
 const {height} = Dimensions.get('window');
 
 let listarry = [];
-let totalcount='';
+let totalcount = '';
 class SearchScreen extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -559,11 +559,10 @@ class SearchScreen extends React.Component {
   _onBack() {
     if (this.props.navigator && this.props.navigator.pop) {
       this.props.navigator.pop();
-     
     } else {
       this.setState({
-        Isvimeo:false
-      })
+        Isvimeo: false,
+      });
       console.warn(
         'Warning: _onBack requires navigator property to function. Either modify the onBack prop or pass a navigator prop',
       );
@@ -1306,67 +1305,62 @@ class SearchScreen extends React.Component {
     );
   };
 
-
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderdata = (item) => {
     console.log('kkoooko' + item.title);
-        return (
-          <View
-            style={{
-              width: '100%',
-              flex: 1,
-              backgroundColor: '#1f1f1f',
-              paddingHorizontal: 20,
-              paddingVertical: 10,
-            }}>
-            <FlatList
-              data={item.sub_pages}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({item}) => (
-                <View style={{alignItems: 'center', marginTop: 10}}>
-                  <TouchableOpacity
-                    style={{width: '100%'}}
-                   >
-                    <View
+    return (
+      <View
+        style={{
+          width: '100%',
+          flex: 1,
+          backgroundColor: '#1f1f1f',
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+        }}>
+        <FlatList
+          data={item.sub_pages}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <View style={{alignItems: 'center', marginTop: 10}}>
+              <TouchableOpacity style={{width: '100%'}}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    width: '100%',
+                    alignItems: 'center',
+                  }}>
+                  <View style={styless.view21}>
+                    <Image
+                      source={require('../../assets/Icons/a_icon.png')}
                       style={{
-                        flexDirection: 'row',
-                        width: '100%',
-                        alignItems: 'center',
-                      }}>
-                      <View style={styless.view21}>
-                        <Image
-                          source={require('../../assets/Icons/a_icon.png')}
-                          style={{
-                            height: '90%',
-                            width: '90%',
-                          }}
-                        />
-                      </View>
-                      <View style={{marginLeft: 10}}>
-                        <Text style={{color: 'white', fontSize: 12}}>
-                          {item.title}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+                        height: '90%',
+                        width: '90%',
+                      }}
+                    />
+                  </View>
+                  <View style={{marginLeft: 10}}>
+                    <Text style={{color: 'white', fontSize: 12}}>
+                      {item.title}
+                    </Text>
+                  </View>
                 </View>
-              )}
-              keyExtractor={(item, index) => index}
-            />
-          </View>
-        );
-
+              </TouchableOpacity>
+            </View>
+          )}
+          keyExtractor={(item, index) => index}
+        />
+      </View>
+    );
   };
 
   render() {
     console.log('kapil bhai' + listarry[0]);
     const {Menu} = this.props;
-     listarry[0].map(
-      (item, key) =>
-      console.log('ndjndjn'+item.sub_pages.length)
+    listarry[0].map(
+      (item, key) => console.log('ndjndjn' + item.sub_pages.length),
       // listarry.push(item.sub_pages.length),
       //  this.setState({
       //    listdata:item.sub_pages
@@ -1426,27 +1420,26 @@ class SearchScreen extends React.Component {
                   backgroundColor: '#141414',
                 }}>
                 <View style={styless.view1}>
-                 
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <View style={styless.view2}>
-                        <Image
-                          source={{
-                            uri:
-                              'http://app.lea.one/wp-content/uploads/2020/08/microphone.png',
-                          }}
-                          style={{
-                            width: '99%',
-                            height: '99%',
-                            borderRadius: 10,
-                          }}
-                        />
-                      </View>
-<View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <View style={styless.view2}>
+                      <Image
+                        source={{
+                          uri:
+                            'http://app.lea.one/wp-content/uploads/2020/08/microphone.png',
+                        }}
+                        style={{
+                          width: '99%',
+                          height: '99%',
+                          borderRadius: 10,
+                        }}
+                      />
+                    </View>
+                    <View>
                       <Text
                         style={{
                           color: 'white',
@@ -1456,18 +1449,16 @@ class SearchScreen extends React.Component {
                         }}>
                         {item.title}
                       </Text>
-                       <Text
+                      <Text
                         style={{
                           color: 'white',
                           marginLeft: 18,
                           fontSize: 12,
-                        
                         }}>
-                        {item.sub_pages.length} Article
+                        {item.sub_pages.length} Articles
                       </Text>
-                      </View>
                     </View>
-                 
+                  </View>
 
                   <TouchableOpacity
                     onPress={() => this.setState({Isvimeo: true})}>
