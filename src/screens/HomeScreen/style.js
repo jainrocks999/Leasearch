@@ -101,7 +101,7 @@ export default StyleSheet.create({
   header: {
     backgroundColor: '#0C1C5B',
     width: '100%',
-    paddingTop: 30,
+    paddingTop:30,
     paddingBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -111,9 +111,11 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   iconView: {
+    width: 60, height: 66,
+    alignSelf:'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -50,
+    marginTop: -40,
   },
   imageContainer: {
     width: '99%',

@@ -11,6 +11,8 @@ import {
   TextInput,
   StatusBar,
   ImageBackground,
+  Alert,
+  SafeAreaView,
 } from 'react-native';
 import styles from './style';
 import {connect} from 'react-redux';
@@ -55,6 +57,8 @@ class HomeScreen extends React.Component {
     });
   };
 
+  
+
   render() {
     let arr = [];
     const {navigation, Menu, Footer, NewsFeed} = this.props;
@@ -62,22 +66,33 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={{backgroundColor: 'black', flex: 1}}>
+        <SafeAreaView>
         <StatusBar
-          barStyle="dark-content"
-          hidden={false}
-          backgroundColor="transparent"
+          barStyle="light-content"
+          hidden={true}
+          backgroundColor="red"
           translucent={true}
         />
+        </SafeAreaView>
 
         <View style={{width: '100%'}}>
+
+
           <View style={styles.header}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('HomeScreenPage')}>
+            
+            onPress={()=>{
+              Alert.alert('ht'),
+              this.props.navigation.navigate('HomeScreenPage')
+            }}>
+              <View >
+
               <Image
                 source={require('../../assets/Images/pp.png')}
                 style={styles.menu}
                 resizeMode={'contain'}
-              />
+                />
+                </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -181,6 +196,7 @@ class HomeScreen extends React.Component {
                   justifyContent: 'center',
                 }}
                 onPress={() =>
+                  Alert.alert('ht'),
                   this.props.navigation.navigate('detail', {
                     MenuId: item.object_id,
                   })

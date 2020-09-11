@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import Axios from 'axios';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 
@@ -18,6 +19,20 @@ import { connect } from 'react-redux';
         super(props);
         this.fetchData();
     }
+    
+    
+
+
+componentDidMount() {
+  axios.get(`https://e44e15f3fc09c786069fe83203b0832c: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@my-westside.myshopify.com/admin/api/2020-07/themes/82630967349/assets.json?asset[key]=config/settings_data.json`)
+    .then(res => {
+      console.log('DATA Catalog : ' +JSON.stringify(res.data));
+    })
+
+    console.log('yoyoyo');
+}
+
+
    fetchData=async()=>{
    this.props.dispatch({type:'Fetch_Menu_Request',url:'menu'})
    this.props.dispatch({type:'Fetch_Footer_Request',url:'footer/icons'})

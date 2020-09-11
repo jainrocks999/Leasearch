@@ -39,7 +39,7 @@ import ArticleDetail from '../screens/ArticleDetail';
 import SearchScreen from '../screens/SearchScreen';
 import HomeScreenPage from '../screens/HomeScreen';
 
-//import demo from '../screens/demo1';
+import demo from '../screens/demo';
 
 const HomeScreenStack = createStackNavigator(
   {
