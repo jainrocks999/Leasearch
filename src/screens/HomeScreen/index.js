@@ -33,15 +33,7 @@ class HomeScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      images: [
-        // require('../../assets/Icons/imgIcon.png'), // Local image
-        'https://source.unsplash.com/1024x768/?nature',
-        'https://source.unsplash.com/1024x768/?water',
-        'https://source.unsplash.com/1024x768/?girl',
-        'https://source.unsplash.com/1024x768/?tree', // Network image
-      ],
-    };
+  
   }
 
   openurl = (data) => {
@@ -82,7 +74,7 @@ class HomeScreen extends React.Component {
             <TouchableOpacity
             
             onPress={()=>{
-              Alert.alert('ht'),
+            
               this.props.navigation.navigate('HomeScreenPage')
             }}>
               <View >
@@ -170,6 +162,7 @@ class HomeScreen extends React.Component {
             />
           </View>
         </ScrollView>
+        
         <View
           style={{
             alignContent: 'center',
@@ -178,40 +171,34 @@ class HomeScreen extends React.Component {
           }}>
           <FlatList
             style={{
-              width: '98%',
+              width: '100%',
               height: 50,
               margin: 10,
             }}
+            horizontal
             data={Footer}
-            horizontal={false}
-            numColumns={3}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={this.renderSeparator}
             renderItem={({item}) => (
+              <View style={{width:'33%',justifyContent:'center', height:'99%',alignItems:'center'}}>
               <TouchableOpacity
                 style={{
-                  width: '33%',
+                  width: '99%',
                   height: '99%',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
-                onPress={() =>
-                  Alert.alert('ht'),
-                  this.props.navigation.navigate('detail', {
-                    MenuId: item.object_id,
-                  })
-                }>
+>
                 <Image
                   style={[styles.list, {marginTop: 5}]}
                   source={{uri: item.image}}
                   resizeMode={'center'}></Image>
-                <View style={{margin: 4}}>
+                <View style={{margin: 4,width:'100%'}}>
                   <Text
                     style={[styles.text, {fontWeight: '100', fontSize: 12}]}>
                     {item.title}
                   </Text>
                 </View>
               </TouchableOpacity>
+              </View>
             )}
             keyExtractor={(item, index) => index}
           />

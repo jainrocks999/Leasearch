@@ -21,7 +21,6 @@ import padStart from 'lodash/padStart';
 
 import YouTubePlayer from 'react-native-youtube-sdk';
 
-import {WebView} from 'react-native-webview';
 import Video from 'react-native-video';
 
 import StatusBar from '../../Config/StatusBar';
