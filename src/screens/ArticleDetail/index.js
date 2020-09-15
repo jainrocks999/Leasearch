@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
+  ScrollView,
   ImageBackground,
 
 } from 'react-native';
@@ -19,31 +20,68 @@ var arr = [
     ItemName2: 'Cotegory | july 15 2020',
   },
 ];
-
+let MenuId='';
 class ArticleDetail extends React.Component {
   constructor(props) {
             super(props);
+
             this.fetchData();
         }
        fetchData=async()=>{
-         const MenuId=this.props.navigation.getParam('MenuId')
+          MenuId=this.props.navigation.getParam('DetailsKey')
          console.log('hhohoh'+MenuId)
      this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ MenuId})
-     
+    //   if(this.props.MenuDetail.image_url == null){
+
+    // }else{
+    //   this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ MenuId})
+
+    // }
+       }
+
+
+       loadApi=async(ID)=>{
+         console.log('jaianiajijai'+ID)
+          this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ ID})
        }
   render() {
-    const {navigation, MenuDetail} = this.props;
-    console.log('any data ',JSON.stringify(MenuDetail))
+    const {MenuDetail} = this.props;
+    if(MenuDetail.image_url == null){
+
+    }else{
+      this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ MenuId})
+
+    }
+   // console.log('any data ',JSON.stringify(MenuDetail))
     return (
-      <View style={{flex: 1, backgroundColor: 'black'}}>
+      <View style={{flex: 1}}>
+       <ScrollView>
         <StatusBar
           barStyle="dark-content"
-          hidden={false}
+          hidden={true}
           backgroundColor="transparent"
           translucent={true}
         />
-          <TouchableOpacity style={{width:'100%',height:50,padding:20,marginTop:10}}
+         
+           <ImageBackground source={{uri :MenuDetail.image_url}} style={{
+               width: '100%',
+               marginTop: 2,
+               height:200
+           }}>
+            <TouchableOpacity
           onPress={()=> this.props.navigation.navigate('Dashboard')}
+          >
+          <Image
+                  source={require('../../assets/Images/pp.png')}
+                  style={styles.menu}
+                  resizeMode={'contain'}
+                />
+          </TouchableOpacity>
+           <View style={{flexdirection:'row',width:'100%', justifyContent: 'flex-end',
+                  }}>
+           <View style={{width:'49%',justifyContent:'flex-end'}}>
+              <TouchableOpacity style={{height:50,padding:20,marginTop:10}}
+          onPress={()=> this.loadApi(MenuDetail.prevPostID)}
           >
           <Image
                 source={require('../../assets/Icons/arrow.png')}
@@ -51,15 +89,21 @@ class ArticleDetail extends React.Component {
                 resizeMode={'cover'}
               />
           </TouchableOpacity>
-          <View style={styles.image}>
-           <Image source={{"uri" : MenuDetail.image_url}} style={{
-               width: '100%',
-               marginTop: 2,
-               height:'100%'
-           }}>
-             
-           </Image>
-            </View>
+          </View>
+          <View style={{width:'49%'}}>
+           <TouchableOpacity style={{height:50,padding:20,marginTop:10}}
+          onPress={()=> this.loadApi(MenuDetail.nextPostID)}
+          >
+          <Image
+                source={require('../../assets/Icons/arrow.png')}
+                 style={{height:20,width:30,tintColor:'white'}}
+                resizeMode={'cover'}
+              />
+          </TouchableOpacity>
+          </View>
+          </View>
+           </ImageBackground>
+           
         <View
           style={{
             flex: 2 / 3,
@@ -95,6 +139,7 @@ class ArticleDetail extends React.Component {
             </Text>
           </View>
         </View>
+        </ScrollView>
       </View>
     );
   }

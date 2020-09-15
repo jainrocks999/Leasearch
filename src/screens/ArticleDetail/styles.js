@@ -14,8 +14,17 @@ export default StyleSheet.create({
     height: 200,
     borderWidth: 1,
     marginTop:-0,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+   menu: {
+    width: 25,
+    height: 25,
+    tintColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
   },
   search: {
     marginTop: 20,

@@ -56,8 +56,10 @@ class SearchScreen extends React.Component {
      */
     this.state = {
       listdata: [],
+      TitleData:this.props.navigation.getParam('MenuId'),
       Visible: false,
       itemValue: '',
+      Index:this.props.navigation.getParam('Index'),
       images: [
         // require('../../assets/Icons/imgIcon.png'), // Local image
         'https://source.unsplash.com/1024x768/?nature',
@@ -1271,43 +1273,14 @@ class SearchScreen extends React.Component {
     return null;
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     listdata: [],
-  //     Visible: true,
-  //     itemValue: '',
-  //     images: [
-  //       // require('../../assets/Icons/imgIcon.png'), // Local image
-  //       'https://source.unsplash.com/1024x768/?nature',
-  //       'https://source.unsplash.com/1024x768/?water',
-  //       'https://source.unsplash.com/1024x768/?girl',
-  //       'https://source.unsplash.com/1024x768/?tree', // Network image
-  //     ],
-  //   };
-  //   this.fetchData();
-  // }
 
   fetchData = async () => {
     const {Menu} = this.props;
-    let keydata = this.props.navigation.getParam('Key');
-    if (keydata == undefined) {
-      keydata = 'Search';
-    }
-    console.log('kapil bb' + Menu);
-    console.log('kapil bb' + keydata);
     Menu.map(
       (item, key) => listarry.push(item.sub_pages),
-      //  this.setState({
-      //    listdata:item.sub_pages
-      //  })
+     
     );
   };
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderdata = (item) => {
     console.log('kkoooko' + item.title);
@@ -1325,7 +1298,13 @@ class SearchScreen extends React.Component {
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <View style={{alignItems: 'center', marginTop: 10}}>
-              <TouchableOpacity style={{width: '100%'}}>
+              <TouchableOpacity
+               onPress={() => {
+            this.props.navigation.navigate('detail',{
+              DetailsKey:item.object_id
+            });
+          }}
+               style={{width: '100%'}}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -1357,9 +1336,10 @@ class SearchScreen extends React.Component {
   };
 
   render() {
-    console.log('kapil bhai' + listarry[0]);
+    console.log('kapil bhai jj'  + this.state.TitleData);
     const {Menu} = this.props;
-    listarry[0].map(
+    console.log('kkkkkkkkkkkkkkk'+this.state.Index)
+    listarry[this.state.Index].map(
       (item, key) => console.log('ndjndjn' + item.sub_pages.length),
       // listarry.push(item.sub_pages.length),
       //  this.setState({
@@ -1388,21 +1368,9 @@ class SearchScreen extends React.Component {
         </TouchableOpacity>
 
         <ScrollView>
-          <View style={styless.iconSearch}>
-            <Image
-              source={require('../../assets/Images/search.png')}
-              style={styless.iconSearch1}
-              resizeMode={'center'}
-            />
-
-            <TextInput
-              placeholder="Search for all Categories,topic etc"
-              placeholderTextColor="grey"
-              style={styless.input}
-            />
-          </View>
+         
           <View style={styless.text}>
-            <Text style={styless.all}>SEARCHES</Text>
+            <Text style={styless.all}>{this.state.TitleData}</Text>
             <View style={styless.slider}></View>
           </View>
           <FlatList
@@ -1410,6 +1378,7 @@ class SearchScreen extends React.Component {
             data={listarry[0]}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
+              
               <View
                 style={{
                   flex: 1,
@@ -1419,14 +1388,18 @@ class SearchScreen extends React.Component {
                   paddingVertical: 15,
                   backgroundColor: '#141414',
                 }}>
+
                 <View style={styless.view1}>
+                 <TouchableOpacity
+                    onPress={() => this.setState({Isvimeo: true})}>
                   <View
                     style={{
+                      width:'99%',
                       flexDirection: 'row',
-                      justifyContent: 'center',
+                     // justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <View style={styless.view2}>
+                    <View style={[styless.view2,{width:'18%'}]}>
                       <Image
                         source={{
                           uri:
@@ -1439,11 +1412,11 @@ class SearchScreen extends React.Component {
                         }}
                       />
                     </View>
-                    <View>
+                    <View style={{width:'68%'}}>
                       <Text
                         style={{
                           color: 'white',
-                          marginLeft: 20,
+                          marginLeft: 4,
                           fontSize: 14,
                           textAlign: 'center',
                         }}>
@@ -1458,10 +1431,9 @@ class SearchScreen extends React.Component {
                         {item.sub_pages.length} Articles
                       </Text>
                     </View>
-                  </View>
+                
 
-                  <TouchableOpacity
-                    onPress={() => this.setState({Isvimeo: true})}>
+                 <View style={{marginLeft:20,width:'8%'}}>
                     <Image
                       style={{
                         height: 25,
@@ -1472,10 +1444,12 @@ class SearchScreen extends React.Component {
                       }}
                       source={require('../../assets/Icons/list_icon.png')}
                     />
-
+                    </View>
+  </View>
                     {/* <Text style={{color: 'white', alignSelf: 'center'}}>Play</Text> */}
                   </TouchableOpacity>
                 </View>
+                
                 {this.renderdata(item)}
               </View>
             )}

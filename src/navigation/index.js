@@ -39,7 +39,7 @@ import ArticleDetail from '../screens/ArticleDetail';
 import SearchScreen from '../screens/SearchScreen';
 import HomeScreenPage from '../screens/HomeScreen';
 
-import demo from '../screens/demo';
+//import demo from '../screens/demo';
 
 const HomeScreenStack = createStackNavigator(
   {
@@ -151,7 +151,7 @@ const AuthStack = createSwitchNavigator({
   // AppStack: AppStack,
   // home: drawerStack,
   Article: ArticleStack,
-  Details: {screen: ArticleDetail},
+  Detailsstack:detailStack,
   Search: SearchStack,
 });
 
