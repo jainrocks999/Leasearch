@@ -565,9 +565,7 @@ class SearchScreen extends React.Component {
       this.setState({
         Isvimeo: false,
       });
-      console.warn(
-        'Warning: _onBack requires navigator property to function. Either modify the onBack prop or pass a navigator prop',
-      );
+     
     }
   }
 
@@ -824,7 +822,7 @@ class SearchScreen extends React.Component {
   // }
 
   onFullScreen = (fullScreen) => {
-    console.log('fullscreen ', fullScreen);
+  
     this.setState({fullScreen});
   };
 
@@ -832,7 +830,7 @@ class SearchScreen extends React.Component {
     this.play.playVideo();
   };
   pause = () => {
-    console.log('hdjhcd');
+  
     this.play.pauseVideo();
   };
 
@@ -1279,7 +1277,7 @@ class SearchScreen extends React.Component {
   };
 
   renderdata = (item) => {
-    console.log('kkoooko' + item.title);
+  
     return (
       <View
         style={{
@@ -1296,7 +1294,7 @@ class SearchScreen extends React.Component {
             <View style={{alignItems: 'center', marginTop: 10}}>
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.push('detail', {
+                  this.props.navigation.navigate('detail', {
                     DetailsKey: item.object_id,
                   });
                 }}
@@ -1332,9 +1330,9 @@ class SearchScreen extends React.Component {
   };
 
   render() {
-    console.log('kapil bhai jj' + this.state.TitleData);
+   
     const {Menu} = this.props;
-    console.log('kkkkkkkkkkkkkkk' + this.state.Index);
+   
     listarry[this.state.Index].map(
       (item, key) => console.log('ndjndjn' + item.sub_pages.length),
       // listarry.push(item.sub_pages.length),
@@ -1343,10 +1341,7 @@ class SearchScreen extends React.Component {
       //  })
     );
 
-    console.log('listarry 0' + JSON.stringify(listarry[0]));
-    console.log('listarry 1' + JSON.stringify(listarry[1]));
-    console.log('listarry 2' + JSON.stringify(listarry[2]));
-    console.log('listarry 3' + JSON.stringify(listarry[3]));
+  
 
     return (
       <View style={styless.container}>
@@ -1410,7 +1405,7 @@ class SearchScreen extends React.Component {
                           }}
                         />
                       </View>
-                      <View style={{width: '68%', marginLeft: 18}}>
+                      <View style={{width: '66%', marginLeft: 18}}>
                         <Text
                           style={{
                             color: 'white',
@@ -1428,7 +1423,7 @@ class SearchScreen extends React.Component {
                         </Text>
                       </View>
 
-                      <View style={{marginLeft: 20, width: '8%'}}>
+                      <View style={{marginLeft: 10, width: '8%'}}>
                         <Image
                           style={{
                             height: 25,

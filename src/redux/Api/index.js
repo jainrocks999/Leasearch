@@ -19,7 +19,7 @@ export default class Api {
     }
   
     static fetchDataByGET=async(url)=>{
-        console.log('kkkkkkkkkkk'+Constants.BasicUrl+url)
+        console.log('Api Response '+Constants.BasicUrl+url)
       try {
 
         const response=await axios({

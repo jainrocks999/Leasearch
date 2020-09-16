@@ -41,13 +41,12 @@ class HomeScreen extends React.Component {
   }
 
   openurl = (data) => {
-    console.log('nbcjhdbcjdbc' + data);
+   
     const {navigation, Menu, Footer, NewsFeed} = this.props;
     NewsFeed.map((item, index) => {
-      console.log('jai ho' + index);
+     
       if (index == data) {
-        console.log('link' + item.link);
-
+      
         Linking.openURL(item.link);
       }
     });
@@ -115,7 +114,7 @@ class HomeScreen extends React.Component {
                   (arr) =>
                     // Alert.alert(arr)
                     this.openurl(arr)
-                  //   console.log('image $'+arr)
+                
                 }
                 dotColor="#FFEE58"
                 inactiveDotColor="#90A4AE"
@@ -135,7 +134,7 @@ class HomeScreen extends React.Component {
               style={{width: '99%', padding: 10}}
               data={Menu}
               showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={this.renderSeparator}
+             // ItemSeparatorComponent={this.renderSeparator}
               numColumns={2}
               renderItem={({item, index}) => (
                 <TouchableOpacity
@@ -157,7 +156,7 @@ class HomeScreen extends React.Component {
                   </ImageBackground>
                 </TouchableOpacity>
               )}
-              keyExtractor={(item, index) => index}
+            keyExtractor={(item) => item.toString()}
             />
           </View>
         </ScrollView>
@@ -177,15 +176,6 @@ class HomeScreen extends React.Component {
                   width: screenWidth / 3,
                   justifyContent: 'center',
                 }}>
-                <TouchableOpacity
-                  style={{
-                    width: '100%',
-                  }}
-                  onPress={() =>
-                    this.props.navigation.navigate('detail', {
-                      MenuId: item.object_id,
-                    })
-                  }>
                   <View
                     style={{
                       width: '100%',
@@ -198,7 +188,7 @@ class HomeScreen extends React.Component {
                       {item.title}
                     </Text>
                   </View>
-                </TouchableOpacity>
+            
               </View>
             )}
             keyExtractor={(item, index) => index}

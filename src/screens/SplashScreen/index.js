@@ -70,8 +70,7 @@ import { connect } from 'react-redux';
 }
 
 const mapStateToProps=(state)=>{
-  console.log('data '+JSON.stringify(state.isFetching))
-  console.log('data '+JSON.stringify(state.Menu))
+ 
   return{
     isFetching:state.isFetching,
     Menu:state.Menu,

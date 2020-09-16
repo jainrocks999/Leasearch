@@ -1,12 +1,15 @@
 initialstate={
     isFetching:false,
     Menu:[],
-    MenuDetails:null,
+    MenuDetail:'',
     NewsFeed:[],
     Footer:[],
 }
 export default (state=initialstate,action)=>{
+    // console.log('reducer data '+type)
+    console.log('reducer data '+ JSON.stringify(action.payload))
 switch (action.type){
+   
 //menu data
     case 'Fetch_Menu_Request':
     return {...state,isFetching:true}
@@ -19,7 +22,7 @@ switch (action.type){
     case 'Fetch_Menu_Details_Request':
     return{...state,isFetching:true}
     case 'Fetch_Menu_Details_Success':
-    return{...state,isFetching:false,MenuDetails:action.payload}   
+    return{...state,isFetching:false,MenuDetail:action.payload}   
     case 'Fetch_Menu_Details_Error':
     return{...state,isFetching:false}
 

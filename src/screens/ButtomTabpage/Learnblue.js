@@ -96,7 +96,7 @@ class RootScreen extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log('jai jai'+JSON.stringify(state))
+
   return {
     isFetching: state.isFetching,
     Menu: state.Menu,

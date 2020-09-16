@@ -46,7 +46,7 @@ var arr = [
 ];
 class MyDrawer extends React.Component {
   constructor(props) {
-    console.log('vbfjvbjkfbvfvbjf');
+   
     super(props);
     this.state = {
       name: '',

@@ -38,24 +38,45 @@ class HomeScreen extends React.Component {
   };
   constructor() {
     super();
+    this.state = {
+value:'',
+ContactList:[],
+    }
+     this.arrayholder = [];
   }
 
   openurl = (data) => {
-    console.log('nbcjhdbcjdbc' + data);
+   
     const {navigation, Menu, Footer, NewsFeed} = this.props;
     NewsFeed.map((item, index) => {
-      console.log('jai ho' + index);
+     
       if (index == data) {
-        console.log('link' + item.link);
+        
 
         Linking.openURL(item.link);
       }
     });
   };
 
+
+   searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.title.toUpperCase()} ${item.title.toUpperCase()}}`;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({
+            ContactList: newData,
+        });
+    };
+
   render() {
     let arr = [];
     const {navigation, Menu, Footer, NewsFeed} = this.props;
+     this.arrayholder = Menu;
     NewsFeed.map((item, key) => arr.push(item.image));
 
     return (
@@ -99,16 +120,18 @@ class HomeScreen extends React.Component {
               borderBottomWidth: 1,
               borderBottomColor: 'grey',
               marginLeft: 10,
-
+color:'white',
               width: '85%',
             }}
+            value={this.state.value}
             placeholder={'Search all Categories & topics '}
             placeholderTextColor={'grey'}
+              onChangeText={text => this.searchFilterFunction(text)}
           />
         </View>
 
-        <ScrollView style={{flex: 1, marginTop: 20, paddingHorizontal: 10}}>
-          <View style={{padding: 4, marginTop: 10}}>
+        <ScrollView style={{flex: 1, marginTop: 10, paddingHorizontal: 10}}>
+          <View style={{padding: 4, marginTop: 1}}>
             <FlatList
               style={{width: '99%'}}
               data={Menu}

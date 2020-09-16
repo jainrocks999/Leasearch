@@ -42,7 +42,7 @@ class LearnBlue extends React.Component {
             <TouchableOpacity
               onPress={() => {
                 this.props.navigation.navigate('category');
-                console.log('pressed');
+               
               }}
               style={{paddingHorizontal: 15, paddingVertical: 20}}>
               <Image
