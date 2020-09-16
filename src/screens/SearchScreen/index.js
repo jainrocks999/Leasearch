@@ -56,10 +56,10 @@ class SearchScreen extends React.Component {
      */
     this.state = {
       listdata: [],
-      TitleData:this.props.navigation.getParam('MenuId'),
+      TitleData: this.props.navigation.getParam('MenuId'),
       Visible: false,
       itemValue: '',
-      Index:this.props.navigation.getParam('Index'),
+      Index: this.props.navigation.getParam('Index'),
       images: [
         // require('../../assets/Icons/imgIcon.png'), // Local image
         'https://source.unsplash.com/1024x768/?nature',
@@ -1273,13 +1273,9 @@ class SearchScreen extends React.Component {
     return null;
   }
 
-
   fetchData = async () => {
     const {Menu} = this.props;
-    Menu.map(
-      (item, key) => listarry.push(item.sub_pages),
-     
-    );
+    Menu.map((item, key) => listarry.push(item.sub_pages));
   };
 
   renderdata = (item) => {
@@ -1299,12 +1295,12 @@ class SearchScreen extends React.Component {
           renderItem={({item}) => (
             <View style={{alignItems: 'center', marginTop: 10}}>
               <TouchableOpacity
-               onPress={() => {
-            this.props.navigation.navigate('detail',{
-              DetailsKey:item.object_id
-            });
-          }}
-               style={{width: '100%'}}>
+                onPress={() => {
+                  this.props.navigation.push('detail', {
+                    DetailsKey: item.object_id,
+                  });
+                }}
+                style={{width: '100%'}}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -1336,9 +1332,9 @@ class SearchScreen extends React.Component {
   };
 
   render() {
-    console.log('kapil bhai jj'  + this.state.TitleData);
+    console.log('kapil bhai jj' + this.state.TitleData);
     const {Menu} = this.props;
-    console.log('kkkkkkkkkkkkkkk'+this.state.Index)
+    console.log('kkkkkkkkkkkkkkk' + this.state.Index);
     listarry[this.state.Index].map(
       (item, key) => console.log('ndjndjn' + item.sub_pages.length),
       // listarry.push(item.sub_pages.length),
@@ -1346,6 +1342,11 @@ class SearchScreen extends React.Component {
       //    listdata:item.sub_pages
       //  })
     );
+
+    console.log('listarry 0' + JSON.stringify(listarry[0]));
+    console.log('listarry 1' + JSON.stringify(listarry[1]));
+    console.log('listarry 2' + JSON.stringify(listarry[2]));
+    console.log('listarry 3' + JSON.stringify(listarry[3]));
 
     return (
       <View style={styless.container}>
@@ -1368,17 +1369,15 @@ class SearchScreen extends React.Component {
         </TouchableOpacity>
 
         <ScrollView>
-         
           <View style={styless.text}>
             <Text style={styless.all}>{this.state.TitleData}</Text>
             <View style={styless.slider}></View>
           </View>
           <FlatList
             style={{marginTop: 10}}
-            data={listarry[0]}
+            data={listarry[this.state.Index]}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              
               <View
                 style={{
                   flex: 1,
@@ -1388,68 +1387,64 @@ class SearchScreen extends React.Component {
                   paddingVertical: 15,
                   backgroundColor: '#141414',
                 }}>
-
                 <View style={styless.view1}>
-                 <TouchableOpacity
+                  <TouchableOpacity
                     onPress={() => this.setState({Isvimeo: true})}>
-                  <View
-                    style={{
-                      width:'99%',
-                      flexDirection: 'row',
-                     // justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <View style={[styless.view2,{width:'18%'}]}>
-                      <Image
-                        source={{
-                          uri:
-                            'http://app.lea.one/wp-content/uploads/2020/08/microphone.png',
-                        }}
-                        style={{
-                          width: '99%',
-                          height: '99%',
-                          borderRadius: 10,
-                        }}
-                      />
-                    </View>
-                    <View style={{width:'68%'}}>
-                      <Text
-                        style={{
-                          color: 'white',
-                          marginLeft: 4,
-                          fontSize: 14,
-                          textAlign: 'center',
-                        }}>
-                        {item.title}
-                      </Text>
-                      <Text
-                        style={{
-                          color: 'white',
-                          marginLeft: 18,
-                          fontSize: 12,
-                        }}>
-                        {item.sub_pages.length} Articles
-                      </Text>
-                    </View>
-                
-
-                 <View style={{marginLeft:20,width:'8%'}}>
-                    <Image
+                    <View
                       style={{
-                        height: 25,
-                        width: 25,
-                        // alignSelf: 'center',
-                        justifyContent: 'center',
+                        width: '99%',
+                        flexDirection: 'row',
+                        // justifyContent: 'center',
                         alignItems: 'center',
-                      }}
-                      source={require('../../assets/Icons/list_icon.png')}
-                    />
+                      }}>
+                      <View style={[styless.view2, {width: '18%'}]}>
+                        <Image
+                          source={{
+                            uri:
+                              'http://app.lea.one/wp-content/uploads/2020/08/microphone.png',
+                          }}
+                          style={{
+                            width: '99%',
+                            height: '99%',
+                            borderRadius: 10,
+                          }}
+                        />
+                      </View>
+                      <View style={{width: '68%', marginLeft: 18}}>
+                        <Text
+                          style={{
+                            color: 'white',
+                            fontSize: 14,
+                          }}>
+                          {item.title}
+                        </Text>
+                        <Text
+                          style={{
+                            color: 'white',
+
+                            fontSize: 12,
+                          }}>
+                          {item.sub_pages.length} Articles
+                        </Text>
+                      </View>
+
+                      <View style={{marginLeft: 20, width: '8%'}}>
+                        <Image
+                          style={{
+                            height: 25,
+                            width: 25,
+                            // alignSelf: 'center',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                          source={require('../../assets/Icons/list_icon.png')}
+                        />
+                      </View>
                     </View>
-  </View>
                     {/* <Text style={{color: 'white', alignSelf: 'center'}}>Play</Text> */}
                   </TouchableOpacity>
                 </View>
-                
+
                 {this.renderdata(item)}
               </View>
             )}

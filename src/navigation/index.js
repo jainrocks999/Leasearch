@@ -38,6 +38,7 @@ import HomeScreen from '../screens/DrawerHomeScreen';
 import ArticleDetail from '../screens/ArticleDetail';
 import SearchScreen from '../screens/SearchScreen';
 import HomeScreenPage from '../screens/HomeScreen';
+import SearchModuleScreen from '../screens/SearchModuleScreen/index';
 
 //import demo from '../screens/demo';
 
@@ -45,6 +46,12 @@ const HomeScreenStack = createStackNavigator(
   {
     HomeScreenPage: {
       screen: HomeScreenPage,
+    },
+    SearchPage: {
+      screen: SearchScreen,
+    },
+    detail: {
+      screen: ArticleDetail,
     },
   },
   {
@@ -56,12 +63,10 @@ const HomeScreenStack = createStackNavigator(
   },
 );
 
-const ArticleStack = createStackNavigator({
-  artile: {
-    screen: Article,
-  },
-  web: {
-    screen: Webinar,
+const SearchModuleScreenStack = createStackNavigator({
+  SearchModuleScreen: {
+    screen: SearchModuleScreen,
+
     navigationOptions: {
       headerShown: false,
     },
@@ -147,12 +152,13 @@ const AuthStack = createSwitchNavigator({
   HomeScreenStack: HomeScreenStack,
 
   Auth: AuthNavigator,
+  SearchModuleScreen: SearchModuleScreenStack,
   //Tab: bottomTab,
   // AppStack: AppStack,
   // home: drawerStack,
-  Article: ArticleStack,
-  Detailsstack:detailStack,
-  Search: SearchStack,
+  // Article: ArticleStack,
+  // Detailsstack:detailStack,
+  // Search: SearchStack,
 });
 
 const RootApp = createAppContainer(AuthStack);

@@ -13,11 +13,11 @@ export default StyleSheet.create({
     width: '100%',
     height: 200,
     borderWidth: 1,
-    marginTop:-0,
+    marginTop: -0,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-   menu: {
+  menu: {
     width: 25,
     height: 25,
     tintColor: 'white',
@@ -51,13 +51,12 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
-    
   },
   menu: {
-    width: 30,
-    height: 20,
+    width: 40,
+    height: 30,
     alignContent: 'center',
-    margin:8
+    margin: 8,
   },
   arrows: {
     tintColor: 'white',

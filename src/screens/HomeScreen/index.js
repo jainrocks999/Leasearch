@@ -13,12 +13,17 @@ import {
   ImageBackground,
   Alert,
   SafeAreaView,
+  Dimensions,
 } from 'react-native';
 import styles from './style';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {SliderBox} from 'react-native-image-slider-box';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
+
 class HomeScreen extends React.Component {
   renderSeparator = () => {
     return (
@@ -31,8 +36,8 @@ class HomeScreen extends React.Component {
       />
     );
   };
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   openurl = (data) => {
@@ -78,13 +83,17 @@ class HomeScreen extends React.Component {
                 />
               </View>
             </TouchableOpacity>
-            
+
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate('SearchModuleScreen');
+              }}>
               <Image
                 source={require('../../assets/Images/search.png')}
                 style={{width: 25, height: 25, marginRight: 10}}
                 resizeMode={'center'}
               />
-           
+            </TouchableOpacity>
           </View>
           <View style={styles.iconView}>
             <Image
@@ -101,7 +110,7 @@ class HomeScreen extends React.Component {
                 //sliderBoxHeight={300}
                 // onPress={this.openurl(arr)}
                 // disableOnPress={true}
-
+                resizeMode={'stretch'}
                 onCurrentImagePressed={
                   (arr) =>
                     // Alert.alert(arr)
@@ -128,13 +137,13 @@ class HomeScreen extends React.Component {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={this.renderSeparator}
               numColumns={2}
-              renderItem={({item,index}) => (
+              renderItem={({item, index}) => (
                 <TouchableOpacity
                   style={{width: '50%', height: 100, padding: 4}}
                   onPress={() =>
                     this.props.navigation.navigate('SearchPage', {
                       MenuId: item.title,
-                      Index:index,
+                      Index: index,
                     })
                   }>
                   <ImageBackground
@@ -156,43 +165,41 @@ class HomeScreen extends React.Component {
         <View
           style={{
             backgroundColor: '#0C1C5B',
-
-            width: '100%',
           }}>
-        
           <FlatList
             data={Footer}
             reverse
             horizontal={true}
             renderItem={({item}) => (
-              <TouchableOpacity
+              <View
                 style={{
                   height: 55,
-                
+                  width: screenWidth / 3,
                   justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onPress={() =>
-                  this.props.navigation.navigate('detail', {
-                    MenuId: item.object_id,
-                  })
-                }>
-                <View
+                }}>
+                <TouchableOpacity
                   style={{
-                    marginHorizontal:50,
-                    width: '50%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Image style={styles.list} source={{uri: item.image}} />
-                </View>
-                <View style={{margin: 4}}>
-                  <Text
-                    style={[styles.text, {fontWeight: '100', fontSize: 12}]}>
-                    {item.title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                    width: '100%',
+                  }}
+                  onPress={() =>
+                    this.props.navigation.navigate('detail', {
+                      MenuId: item.object_id,
+                    })
+                  }>
+                  <View
+                    style={{
+                      width: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image style={styles.list} source={{uri: item.image}} />
+                    <Text
+                      style={[styles.text, {fontWeight: '100', fontSize: 12}]}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             )}
             keyExtractor={(item, index) => index}
           />
