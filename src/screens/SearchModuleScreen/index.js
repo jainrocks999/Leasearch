@@ -120,7 +120,7 @@ ContactList:[],
               borderBottomWidth: 1,
               borderBottomColor: 'grey',
               marginLeft: 10,
-color:'white',
+              color:'white',
               width: '85%',
             }}
             value={this.state.value}

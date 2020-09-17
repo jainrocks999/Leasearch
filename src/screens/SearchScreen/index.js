@@ -20,6 +20,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import styless from './style';
+import Loader from '../../Util/loading';
 import {withNavigation, DrawerActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
@@ -1277,21 +1278,24 @@ class SearchScreen extends React.Component {
   };
 
   renderdata = (item) => {
-  
+    if(item.sub_pages.length == 0){
+
+    }else{
     return (
       <View
         style={{
           width: '100%',
           flex: 1,
-          backgroundColor: '#1f1f1f',
-          paddingHorizontal: 20,
-          paddingVertical: 10,
+         
+         
         }}>
         <FlatList
           data={item.sub_pages}
+          style={{backgroundColor: '#1f1f1f', paddingHorizontal: 20,marginTop:4,
+          }}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <View style={{alignItems: 'center', marginTop: 10}}>
+            <View style={{alignItems: 'center',marginBottom:12, marginTop: 10, }}>
               <TouchableOpacity
                 onPress={() => {
                   this.props.navigation.navigate('detail', {
@@ -1303,6 +1307,8 @@ class SearchScreen extends React.Component {
                   style={{
                     flexDirection: 'row',
                     width: '100%',
+                    
+                    
                     alignItems: 'center',
                   }}>
                   <View style={styless.view21}>
@@ -1327,11 +1333,12 @@ class SearchScreen extends React.Component {
         />
       </View>
     );
+    }
   };
 
   render() {
    
-    const {Menu} = this.props;
+    const {Menu,isFetching} = this.props;
    
     listarry[this.state.Index].map(
       (item, key) => console.log('ndjndjn' + item.sub_pages.length),
@@ -1345,6 +1352,9 @@ class SearchScreen extends React.Component {
 
     return (
       <View style={styless.container}>
+       {isFetching
+        ?<Loader/> 
+         :null}
         <StatusBar
           barStyle="light-content"
           hidden={false}
@@ -1400,9 +1410,10 @@ class SearchScreen extends React.Component {
                           }}
                           style={{
                             width: '99%',
-                            height: '99%',
-                            borderRadius: 10,
+                            height: '94%',
+                            borderRadius: 20,
                           }}
+                          resizeMode={'center'}
                         />
                       </View>
                       <View style={{width: '66%', marginLeft: 18}}>

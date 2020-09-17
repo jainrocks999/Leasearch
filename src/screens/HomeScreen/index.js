@@ -20,7 +20,7 @@ import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {SliderBox} from 'react-native-image-slider-box';
-
+import Loader from '../../Util/loading';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -54,12 +54,15 @@ class HomeScreen extends React.Component {
 
   render() {
     let arr = [];
-    const {navigation, Menu, Footer, NewsFeed} = this.props;
+    const {navigation, Menu, Footer,isFetching, NewsFeed} = this.props;
     NewsFeed.map((item, key) => arr.push(item.image));
 
     return (
       <View style={{backgroundColor: 'black', flex: 1}}>
         <SafeAreaView>
+        {isFetching
+        ?<Loader/> 
+         :null}
           <StatusBar
             barStyle="light-content"
             hidden={true}

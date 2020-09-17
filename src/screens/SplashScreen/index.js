@@ -9,8 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 import styles from './style';
-import Axios from 'axios';
-import axios from 'axios';
+
 
 import { connect } from 'react-redux';
 

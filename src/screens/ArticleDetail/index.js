@@ -11,6 +11,7 @@ import {
 
 } from 'react-native';
 import styles from './styles';
+import Loader from '../../Util/loading';
 import { connect } from 'react-redux';
 import {SliderBox} from 'react-native-image-slider-box';
 let MenuId='';
@@ -35,44 +36,63 @@ class ArticleDetail extends React.Component {
          console.log('jaianiajijai'+ID)
           this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ ID})
        }
-  render() {
-    const {MenuDetail} = this.props;
-    console.log('Details data Check '+MenuDetail.image_url)
-    console.log('Details data Check '+MenuDetail.title)
-    console.log('Details data Check '+MenuDetail.description)
-   // Alert.alert(MenuDetail)
-    // if(MenuDetail.image_url == null){
+RenderData(){
+  const {MenuDetail} = this.props;
 
-    // }else{
-    //   this.props.dispatch({type:'Fetch_Menu_Details_Request',url:'page/'+ MenuId})
-
-    // }
-   // console.log('any data ',JSON.stringify(MenuDetail))
-    return (
-      <View style={{flex: 1}}>
-       <ScrollView>
-        <StatusBar
-          barStyle="dark-content"
-          hidden={true}
-          backgroundColor="transparent"
-          translucent={true}
-        />
-         
-           <ImageBackground  source={{uri:MenuDetail.image_url}} style={{
-               width: '100%',
-               marginTop: 2,
-               height:200
+  console.log('hhhhhhhhhhhhhhhhhh pre'+MenuDetail.prevPostID)
+  console.log('hhhhhhhhhhhhhhhhhh next'+MenuDetail.nextPostID)
+if(MenuDetail.prevPostID == ''){
+  return(
+    <View
+           style={{
+                flexDirection: 'row',
+                width: '100%',
+                justifyContent: 'flex-end',
+                position: 'absolute',
+                bottom: 10,
            }}>
-            <TouchableOpacity
-          onPress={()=> this.props.navigation.navigate('HomeScreenPage')}
+
+          <View>
+           <TouchableOpacity style={{height:50,padding:20,marginTop:10}}
+          onPress={()=> this.loadApi(MenuDetail.nextPostID)}
           >
           <Image
-                  source={require('../../assets/Images/pp.png')}
-                  style={styles.menu}
-                  resizeMode={'contain'}
-                />
+                source={require('../../assets/Icons/right_arrow.png')}
+                 style={{height:20,width:30,tintColor:'white'}}
+                resizeMode={'cover'}
+              />
           </TouchableOpacity>
-           <View
+          </View>
+          </View>
+  )
+
+}else if(MenuDetail.nextPostID == ''){
+  return(
+    <View
+           style={{
+                flexDirection: 'row',
+                width: '100%',
+                justifyContent: 'flex-start',
+                position: 'absolute',
+                bottom: 10,
+           }}>
+           <View>
+              <TouchableOpacity style={{height:50,padding:20,marginTop:10}}
+          onPress={()=> this.loadApi(MenuDetail.prevPostID)}
+          >
+          <Image
+                 source={require('../../assets/Icons/left_arrow.png')}
+                 style={{height:20,width:30,tintColor:'white'}}
+                resizeMode={'cover'}
+              />
+          </TouchableOpacity>
+          </View>
+          </View>
+  )
+
+}else{
+  return(
+    <View
            style={{
                 flexDirection: 'row',
                 width: '100%',
@@ -103,6 +123,42 @@ class ArticleDetail extends React.Component {
           </TouchableOpacity>
           </View>
           </View>
+  )
+}
+}
+  render() {
+    const {MenuDetail,isFetching} = this.props;
+    console.log('Details data Check '+MenuDetail.image_url)
+    console.log('Details data Check '+MenuDetail.title)
+    console.log('Details data Check '+MenuDetail.description)
+    return (
+      <View style={{flex: 1,backgroundColor:'black'}}>
+       <ScrollView>
+        {isFetching
+        ?<Loader/> 
+         :null}
+        <StatusBar
+          barStyle="dark-content"
+          hidden={true}
+          backgroundColor="transparent"
+          translucent={true}
+        />
+         
+           <ImageBackground  source={{uri:MenuDetail.image_url}} style={{
+               width: '100%',
+               marginTop: 2,
+               height:200
+           }}>
+            <TouchableOpacity
+          onPress={()=> this.props.navigation.navigate('HomeScreenPage')}
+          >
+          <Image
+                  source={require('../../assets/Images/pp.png')}
+                  style={styles.menu}
+                  resizeMode={'contain'}
+                />
+          </TouchableOpacity>
+           {this.RenderData()}
            </ImageBackground>
            
         <View
@@ -132,8 +188,10 @@ class ArticleDetail extends React.Component {
             </Text>
             <Text
               style={{
-                marginTop: 30,
-                fontSize: 18,
+                marginTop: 20,
+                fontSize: 17,
+                padding:10,
+                marginBottom:4,
                 color: '#FBFBFB',
               }}>
              {MenuDetail.description}
