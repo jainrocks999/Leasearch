@@ -1,164 +1,40 @@
 import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {
-  Linking,
-  View,
-  Alert,
-  ScrollView,
-  ActivityIndicator,
-  Share,
-  Text,
-  Picker,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import {
-  createBottomTabNavigator,
-  createMaterialTopTabNavigator,
-} from 'react-navigation-tabs';
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import Icon from 'react-native-vector-icons/Ionicons';
-import CALENDER from '../screens/ButtomTabpage/calendar.js';
-import Webinar from '../screens/ButtomTabpage/webniar';
-import Learnblue from '../screens/ButtomTabpage/Learnblue';
 
-//import Classes from '../screens/Classes';
-import SplashScreen from '../screens/SplashScreen';
-import LearnBlue from '../screens/ButtomTabpage/Learnblue';
+import SplashScreen from '../screens/Auth/SplashScreen';
+import SubHomeDetailScreen from '../screens/Main/SubHomeDetailScreen';
+import HomeDetailScreen from '../screens/Main/HomeDetailScreen';
+import HomeScreenPage from '../screens/Main/HomeScreen';
+import SearchScreen from '../screens/Main/SearchScreen/index';
 
-//import Webinar from '../screens/Webinar';
-import Category from '../screens/Category';
-import Article from '../screens/Article/index';
-import drawerPage from '../screens/DrawerPage';
-//import Saved from '../screens/Saved';
-import HomeScreen from '../screens/DrawerHomeScreen';
-import ArticleDetail from '../screens/ArticleDetail';
-import SearchScreen from '../screens/SearchScreen';
-import HomeScreenPage from '../screens/HomeScreen';
-import SearchModuleScreen from '../screens/SearchModuleScreen/index';
-
-//import demo from '../screens/demo';
-
-const HomeScreenStack = createStackNavigator(
-  {
-    HomeScreenPage: {
-      screen: HomeScreenPage,
-    },
-    SearchPage: {
-      screen: SearchScreen,
-    },
-    detail: {
-      screen: ArticleDetail,
-    },
+const HomeScreenStack = createStackNavigator({
+  HomeScreenPage: {
+    screen: HomeScreenPage,
   },
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        header: false,
-      };
-    },
+  SearchPage: {
+    screen: HomeDetailScreen,
   },
-);
+  detail: {
+    screen: SubHomeDetailScreen,
+  },
+});
 
 const SearchModuleScreenStack = createStackNavigator({
   SearchModuleScreen: {
-    screen: SearchModuleScreen,
-
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-});
-const detailStack = createStackNavigator({
-  detail: {
-    screen: ArticleDetail,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-});
-const SearchStack = createStackNavigator({
-  SearchPage: {
     screen: SearchScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
   },
 });
-
-const AuthNavigator = createStackNavigator(
-  {
-    splash: {
-      screen: SplashScreen,
-    },
-
-    LearnBlue: {
-      screen: LearnBlue,
-    },
+const AuthNavigator = createStackNavigator({
+  splash: {
+    screen: SplashScreen,
   },
-
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        header: false,
-      };
-    },
-  },
-);
-
-const DrawerStack = createStackNavigator(
-  {
-    Drawer: {
-      screen: HomeScreen,
-    },
-  },
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        header: false,
-        title: '',
-        headerStyle: {
-          backgroundColor: 'transparent',
-        },
-        headerTintColor: 'black',
-        headerLeft: () => (
-          <Icon
-            style={{paddingLeft: 10, color: 'white'}}
-            onPress={() => navigation.toggleDrawer()}
-            name="md-menu"
-            size={30}
-          />
-        ),
-      };
-    },
-  },
-);
-// const AppStack = createDrawerNavigator(
-//   {
-//     Dashboard: DrawerStack,
-//     Article:detailStack
-//   },
-//   {
-//     initialRouteName: 'Dashboard',
-//     contentComponent: drawerPage,
-//   },
-// );
+});
 const AuthStack = createSwitchNavigator({
-  //Demo: demo,
   SplashScreen: SplashScreen,
   HomeScreenStack: HomeScreenStack,
-
   Auth: AuthNavigator,
   SearchModuleScreen: SearchModuleScreenStack,
-  //Tab: bottomTab,
-  // AppStack: AppStack,
-  // home: drawerStack,
-  // Article: ArticleStack,
-  // Detailsstack:detailStack,
-  // Search: SearchStack,
 });
 
 const RootApp = createAppContainer(AuthStack);
